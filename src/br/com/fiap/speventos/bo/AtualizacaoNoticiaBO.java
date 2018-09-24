@@ -3,25 +3,26 @@ package br.com.fiap.speventos.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fiap.speventos.beans.AtualizacaoEvento;
 import br.com.fiap.speventos.beans.AtualizacaoNoticia;
 import br.com.fiap.speventos.beans.Colaborador;
+import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.beans.Noticia;
+import br.com.fiap.speventos.beans.Usuario;
+import br.com.fiap.speventos.dao.AtualizacaoEventoDAO;
 import br.com.fiap.speventos.dao.AtualizacaoNoticiaDAO;
 
-
 /**
- * Classe para validar e padronizar dados para a tabela T_SGE_ATUALIZACAO_NOTICIA
+ * Classe para validar e padronizar dados para a tabela T_SGE_ATUALIZACAO_EVENTO
  * @version 1.0
  * @since 1.0
  * @author Techbot Solutions
- * @see AtualizacaoNoticia
- * @see Colaborador
- * @see Noticia
- * @see AtualizacaoNoticiaDAO
- *  
+ * @see AtualizacaoEvento
+ * @see AtualizacaoEventoDAO 
+ * @see Usuario
+ * @see Evento
  *
  */
-
 
 public class AtualizacaoNoticiaBO {
 	

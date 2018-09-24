@@ -1,4 +1,4 @@
-package br.com.fiap.speventos.beans;
+package antigo;
 
 import java.util.ArrayList;
 import java.util.List;

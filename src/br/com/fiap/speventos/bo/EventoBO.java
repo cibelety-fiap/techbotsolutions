@@ -123,7 +123,7 @@ public class EventoBO {
 
 		EventoDAO dao = new EventoDAO();
 
-		String retorno = dao.editar(evento) + "registro editado";
+		String retorno = dao.editar(evento) + " registro editado";
 		
 		evento.setLinkImagem(evento.getLinkImagem().toUpperCase());
 		evento.setNomeEvento(evento.getNomeEvento().toUpperCase());
