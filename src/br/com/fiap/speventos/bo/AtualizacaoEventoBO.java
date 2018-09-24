@@ -5,7 +5,7 @@ import java.util.List;
 
 
 import br.com.fiap.speventos.beans.AtualizacaoEvento;
-import br.com.fiap.speventos.beans.Evento_antigo;
+import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.beans.Usuario;
 import br.com.fiap.speventos.dao.AtualizacaoEventoDAO;
 
