@@ -15,41 +15,48 @@ import br.com.fiap.speventos.dao.AtualizacaoEventoDAO;
  * @since 1.0
  * @author Techbot Solutions
  * @see AtualizacaoEvento
+ * @see AtualizacaoEventoDAO 
  * @see Usuario
- * @see Evento_antigo
- * @see AtualizacaoEventoDAO
- *  
+ * @see Evento
  *
  */
-
 public class AtualizacaoEventoBO {
 	
 	/**
 	 * Metodo responsavel por verificar regras de negócio, validacoes e padronizacoes
 	 * relacionadas a inserção de uma nova atualizacao de evento
 	 * Regras de negocio validadas:
-	 * O codigo da atualizacao de evento deve ter entre 1 a 5 digitos
-	 * A data da atualizacao de evento deve ter entre 1 a 10 caracteres
-	 * O tipo de atualizacao de evento deve ter de 1 a 30 caracteres
-	 * O codigo da atualizacao de evento não poda se cadastrado caso ja exista no banco
+	 * o codigo da atualizacao de evento deve ter entre 1 a 5 digitos,
+	 * o codigo do usuario deve ter entre 1 a 5 digitos,
+	 * o codigo do evento evento deve ter entre 1 a 5 digitos,
+	 * a data da atualizacao de evento deve ser valida,
+	 * o tipo de atualizacao de evento deve ter de 1 a 30 caracteres,
+	 * a atualizacao de evento não pode ser cadastrada caso o codigo da atualizacao ja exista no banco
 	 * @author Techbot Solutions
 	 * @param atualizacaoEvento recebe um objeto do tipo AtualizacaoEvento (Beans)
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
 	 * @throws Exception - Chamada da exceção checked 
-	 *
 	 */
-	
-	public static String novaAtualizacaoEvento(AtualizacaoEvento atualizacaoEvento, Usuario codigoUsuario,
-			Evento_antigo codigoEvento) throws Exception {
-		if (atualizacaoEvento.getTipoAtualizacao().isEmpty() || atualizacaoEvento.getTipoAtualizacao().length() < 30) {
-			return "Tipo de atualizacao de evento errada";
-		}
-		if (atualizacaoEvento.getDataHoraAtualizacao().isEmpty()
-				|| atualizacaoEvento.getDataHoraAtualizacao().length() < 10) {
-			return "Data da atualização errada";
-		}
+	public static String novaAtualizacaoEvento(AtualizacaoEvento atualizacaoEvento) throws Exception {
+		
 		if (atualizacaoEvento.getCodigoAtualizacaoEvento() < 1 || atualizacaoEvento.getCodigoAtualizacaoEvento() > 99999) {
+			return "Codigo de atualizacao evento invalido";
+		}
+		
+		if (atualizacaoEvento.getUsuario().getCodigoUsuario() < 1 || atualizacaoEvento.getUsuario().getCodigoUsuario() > 99999) {
+			return "Codigo de usuario invalido";
+		}
+		
+		if (atualizacaoEvento.getEvento().getCodigoEvento() < 1 || atualizacaoEvento.getEvento().getCodigoEvento() > 99999) {
 			return "Codigo de evento invalido";
+		}
+		
+		if (!DataBO.validacaoDataHora(atualizacaoEvento.getDataHoraAtualizacao())) {
+			return "Data/hora atualizacao invalida";
+		}
+		
+		if (atualizacaoEvento.getTipoAtualizacao().isEmpty() || atualizacaoEvento.getTipoAtualizacao().length() > 30) {
+			return "Tipo de atualizacao invalida";
 		}
 
 		atualizacaoEvento.setTipoAtualizacao(atualizacaoEvento.getTipoAtualizacao().toUpperCase());
@@ -59,14 +66,28 @@ public class AtualizacaoEventoBO {
 		AtualizacaoEvento atualizacaoEventoCodRepetido = dao.consultar(atualizacaoEvento.getCodigoAtualizacaoEvento());
 
 		if (atualizacaoEventoCodRepetido.getCodigoAtualizacaoEvento() > 0) {
-			return "Atualizacao de evento já existe";
-
+			return "Atualizacao de evento ja existe";
 		}
 
-		dao.cadastrar(atualizacaoEvento);
+		String cadastroEvento = EventoBO.novoEvento(new Evento(
+				atualizacaoEvento.getEvento().getCodigoEvento(), 
+				atualizacaoEvento.getEvento().getLinkImagem(),
+				atualizacaoEvento.getEvento().getNomeEvento(),
+				atualizacaoEvento.getEvento().getTipoEvento(),
+				atualizacaoEvento.getEvento().getSubtipoEvento(),
+				atualizacaoEvento.getEvento().getDescricaoEvento(),
+				atualizacaoEvento.getEvento().getContatoMaisInfo()
+			)
+		);
+		
+		if(!cadastroEvento.equals("1 registro cadastrado")) {
+			dao.fechar();
+			return "Erro no cadastro do evento";
+		}
+		
 		dao.fechar();
 
-		return "OK";
+		return dao.cadastrar(atualizacaoEvento) + " registro cadastrado";
 
 	}
 	
@@ -75,13 +96,10 @@ public class AtualizacaoEventoBO {
 	 * relacionadas a consulta de uma atualizacao de evento por codigo
 	 * Regras de negocio validadas:
 	 * O codigo da atualizacao de evento deve ter entre 1 a 5 digitos
-	 * @param codigoAtualizacaoEvento recebe um objeto do tipo int
-	 * @return um construtor vazio
+	 * @param codigoAtualizacaoEvento recebe um int
+	 * @return um objeto do tipo AtualizacaoEvento (Beans)
 	 * @throws Exception - Chamada da excecao checked
 	 */
-	
-	
-
 	public static AtualizacaoEvento consultaAtualizacaoEvento(int codigoAtualizacaoEvento) throws Exception {
 		if (codigoAtualizacaoEvento < 1 || codigoAtualizacaoEvento > 99999) {
 			return new AtualizacaoEvento();

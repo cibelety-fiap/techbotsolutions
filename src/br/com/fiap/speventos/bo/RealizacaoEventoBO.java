@@ -31,12 +31,6 @@ public class RealizacaoEventoBO {
 	 * @throws Exception - Chamada da exceção checked Exception
 	 */
 	public static String novaRealizacaoEvento(RealizacaoEvento realizacaoEvento) throws Exception {
-
-//		private int codigoRealizacaoEvento;
-//		private Evento evento;
-//		private Local local;
-//		private Date dataHoraInicio;
-//		private Date dataHoraTermino;
 		
 		if (realizacaoEvento.getCodigoRealizacaoEvento() < 1 || 
 				realizacaoEvento.getCodigoRealizacaoEvento() > 99999) {
@@ -74,7 +68,7 @@ public class RealizacaoEventoBO {
 			return "Realizacao de evento ja existe";
 		}
 
-		Evento eventoExiste = EventoBO_cibele.consultaEvento(realizacaoEvento.getEvento().getCodigoEvento());
+		Evento eventoExiste = EventoBO.consultaEvento(realizacaoEvento.getEvento().getCodigoEvento());
 		
 		if(eventoExiste.getCodigoEvento() == 0) {
 			return "Evento relacionado a realizacao de evento nao existe";
@@ -159,7 +153,7 @@ public class RealizacaoEventoBO {
 					
 		RealizacaoEventoDAO dao = new RealizacaoEventoDAO();
 
-		Evento eventoExiste = EventoBO_cibele.consultaEvento(realizacaoEvento.getCodigoRealizacaoEvento());
+		Evento eventoExiste = EventoBO.consultaEvento(realizacaoEvento.getCodigoRealizacaoEvento());
 		
 		if(eventoExiste.getCodigoEvento() == 0) {
 			return "Evento relacionado a realizacao de evento nao existe";

@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 import br.com.fiap.speventos.beans.Local;
 import br.com.fiap.speventos.beans.RealizacaoEvento;
-import br.com.fiap.speventos.bo.EventoBO_cibele;
+import br.com.fiap.speventos.bo.EventoBO;
 import br.com.fiap.speventos.bo.LocalBO;
 import br.com.fiap.speventos.bo.RealizacaoEventoBO;
 import br.com.fiap.speventos.excecao.Excecao;
@@ -32,7 +32,7 @@ public class Funcionalidade1 {
 			
 			RealizacaoEvento realizacaoEvento2 = new RealizacaoEvento(
 					codigoRealizEvento,
-					EventoBO_cibele.consultaEvento(codEvento),
+					EventoBO.consultaEvento(codEvento),
 					local, 
 					dataHoraInicio,
 					dataHoraTermino
