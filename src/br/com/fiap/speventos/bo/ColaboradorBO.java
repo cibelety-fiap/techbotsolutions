@@ -68,6 +68,7 @@ public class ColaboradorBO {
 		return retorno;
 	}
 
+	
 	/**
 	 * Metodo para validar e fazer pesquisa de codigo de usuario 
 	 * relacionadas a consulta de um codigo de usuario 
