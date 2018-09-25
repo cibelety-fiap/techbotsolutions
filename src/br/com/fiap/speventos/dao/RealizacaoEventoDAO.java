@@ -37,36 +37,6 @@ public class RealizacaoEventoDAO {
 	public RealizacaoEventoDAO() throws Exception {
 		con = new Conexao().conectar();
 	}
-
-	/**
-	  * Metodo para calcular o proximo codigo de realizacao de evento a ser inserido,
-	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
-	  * @author Techbot Solutions
-	  * @param nao possui parametros
-	  * @return um int com o numero do proximo codigo a ser inseridos
-	  * @throws Exception - Chamada da excecao Exception
-	  */
-	public int calcularCodRealizEvento() throws Exception {
-		int proxCodigo = 0;
-		int qtCodRealizEvento = 0;
-		
-		stmt = con.prepareStatement("SELECT COUNT(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
-
-		rs = stmt.executeQuery();
-		if (rs.next()) {
-			qtCodRealizEvento= rs.getInt("COUNT(CD_REALIZ_EVENTO)");
-			if (qtCodRealizEvento == 0) {
-				proxCodigo = 1;
-			} else {			
-				stmt = con.prepareStatement("SELECT MAX(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
-				rs = stmt.executeQuery();
-				if (rs.next()) {
-					proxCodigo = rs.getInt("MAX(CD_REALIZ_EVENTO)") + 1;
-				}
-			}
-		}
-		return proxCodigo;
-	}
 	
 	/**
 	  * Metodo para adicionar um registro na tabela T_SGE_REALIZACAO_EVENTO
@@ -264,5 +234,35 @@ public class RealizacaoEventoDAO {
 	  */	
 	public void fechar() throws Exception{
 		con.close();
+	}
+	
+	/**
+	  * Metodo para calcular o proximo codigo de realizacao de evento a ser inserido,
+	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
+	  * @author Techbot Solutions
+	  * @param nao possui parametros
+	  * @return um int com o numero do proximo codigo a ser inseridos
+	  * @throws Exception - Chamada da excecao Exception
+	  */
+	public int calcularCodRealizEvento() throws Exception {
+		int proxCodigo = 0;
+		int qtCodRealizEvento = 0;
+		
+		stmt = con.prepareStatement("SELECT COUNT(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
+
+		rs = stmt.executeQuery();
+		if (rs.next()) {
+			qtCodRealizEvento= rs.getInt("COUNT(CD_REALIZ_EVENTO)");
+			if (qtCodRealizEvento == 0) {
+				proxCodigo = 1;
+			} else {			
+				stmt = con.prepareStatement("SELECT MAX(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
+				rs = stmt.executeQuery();
+				if (rs.next()) {
+					proxCodigo = rs.getInt("MAX(CD_REALIZ_EVENTO)") + 1;
+				}
+			}
+		}
+		return proxCodigo;
 	}
 }

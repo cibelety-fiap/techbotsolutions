@@ -9,7 +9,6 @@ import br.com.fiap.speventos.dao.LocalDAO;
 
 public class LocalBO {
 
-
 	public static String novoLocal(Local local) throws Exception {
 		
 		if (local.getCodigoLocal() < 1 || local.getCodigoLocal() > 99999) {
@@ -108,5 +107,19 @@ public class LocalBO {
 		dao.fechar();
 		
 		return retorno + "registro removido";
+	}
+	
+	/**
+	 * Metodo para chamar o calculo do proximo codigo de local
+	 * @author Techbot Solutions
+	 * @param nao ha parametros
+	 * @return um int com o numero do proximo codigo de local
+	 * @throws Exception - Chamada da exceção checked Exception
+	 */
+	public static int consultaProxCodLocal() throws Exception {
+		LocalDAO dao = new LocalDAO();
+		int retorno = dao.calcularCodLocal();
+		dao.fechar();
+		return retorno;
 	}
 }

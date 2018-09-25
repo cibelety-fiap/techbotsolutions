@@ -36,36 +36,6 @@ public class LocalDAO {
 	public LocalDAO() throws Exception {
 		con = new Conexao().conectar();
 	}
-
-	/**
-	  * Metodo para calcular o proximo codigo de local a ser inserido,
-	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
-	  * @author Techbot Solutions
-	  * @param nao possui parametros
-	  * @return um int com o numero do proximo codigo a ser inserido
-	  * @throws Exception - Chamada da excecao Exception
-	  */
-	public int calcularCodLocal() throws Exception {
-		int proxCodigo = 0;
-		int qtCodLocal = 0;
-		
-		stmt = con.prepareStatement("SELECT COUNT(CD_LOCAL) FROM T_SGE_LOCAL");
-
-		rs = stmt.executeQuery();
-		if (rs.next()) {
-			qtCodLocal= rs.getInt("COUNT(CD_LOCAL)");
-			if (qtCodLocal == 0) {
-				proxCodigo = 1;
-			} else {			
-				stmt = con.prepareStatement("SELECT MAX(CD_LOCAL) FROM T_SGE_LOCAL");
-				rs = stmt.executeQuery();
-				if (rs.next()) {
-					proxCodigo = rs.getInt("MAX(CD_LOCAL)") + 1;
-				}
-			}
-		}
-		return proxCodigo;
-	}
 	
 	/**
 	  * Metodo para adicionar um registro na tabela T_SGE_LOCAL
@@ -127,7 +97,7 @@ public class LocalDAO {
 		List<Local> listaLocal = new ArrayList<Local>();
 		
 		stmt = con.prepareStatement("SELECT CD_LOCAL, NM_LOCAL, DS_ENDERECO FROM T_SGE_LOCAL "
-				+ "WHERE NM_LOCAL LIKE ?");
+				+ "WHERE UPPER(NM_LOCAL) LIKE ?");
 		stmt.setString(1, "%" + nomeLocal + "%");
 		
 		rs = stmt.executeQuery();
@@ -189,5 +159,35 @@ public class LocalDAO {
 	  */
 	public void fechar() throws Exception{
 		con.close();
+	}
+	
+	/**
+	  * Metodo para calcular o proximo codigo de local a ser inserido,
+	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
+	  * @author Techbot Solutions
+	  * @param nao possui parametros
+	  * @return um int com o numero do proximo codigo de local a ser inserido
+	  * @throws Exception - Chamada da excecao Exception
+	  */
+	public int calcularCodLocal() throws Exception {
+		int proxCodigo = 0;
+		int qtCodLocal = 0;
+		
+		stmt = con.prepareStatement("SELECT COUNT(CD_LOCAL) FROM T_SGE_LOCAL");
+
+		rs = stmt.executeQuery();
+		if (rs.next()) {
+			qtCodLocal= rs.getInt("COUNT(CD_LOCAL)");
+			if (qtCodLocal == 0) {
+				proxCodigo = 1;
+			} else {			
+				stmt = con.prepareStatement("SELECT MAX(CD_LOCAL) FROM T_SGE_LOCAL");
+				rs = stmt.executeQuery();
+				if (rs.next()) {
+					proxCodigo = rs.getInt("MAX(CD_LOCAL)") + 1;
+				}
+			}
+		}
+		return proxCodigo;
 	}
 }

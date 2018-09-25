@@ -6,6 +6,7 @@ import java.util.List;
 import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.beans.Local;
 import br.com.fiap.speventos.beans.RealizacaoEvento;
+import br.com.fiap.speventos.dao.LocalDAO;
 import br.com.fiap.speventos.dao.RealizacaoEventoDAO;
 
 
@@ -21,7 +22,7 @@ import br.com.fiap.speventos.dao.RealizacaoEventoDAO;
 public class RealizacaoEventoBO {
 
 	/**
-	 * Método para verificar regras de negócio, validações e padronizações 
+	 * Metodo para verificar regras de negócio, validações e padronizações 
 	 * relacionadas à inserção de uma nova RealizacaoEvento 
 	 * Regras de negócio validadas:
 	 * tamanho do nome do evento (etc)
@@ -203,6 +204,20 @@ public class RealizacaoEventoBO {
 		
 		String retorno = dao.remover(codRealizEvento) + " registro removido";
 		
+		dao.fechar();
+		return retorno;
+	}
+	
+	/**
+	 * Metodo para chamar o calculo do proximo codigo de realizacao de evento
+	 * @author Techbot Solutions
+	 * @param nao ha parametros
+	 * @return um int com o numero do proximo codigo de realizacao de evento
+	 * @throws Exception - Chamada da exceção checked Exception
+	 */
+	public static int consultaProxCodRealizEvento() throws Exception {
+		RealizacaoEventoDAO dao = new RealizacaoEventoDAO();
+		int retorno = dao.calcularCodRealizEvento();
 		dao.fechar();
 		return retorno;
 	}

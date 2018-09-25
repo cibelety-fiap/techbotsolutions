@@ -13,7 +13,7 @@ public class Funcionalidade2 {
 
 		try {
 
-			String nomeEvento = Magica.texto("Digite o nome evento");
+			String nomeEvento = Magica.texto("Digite o nome evento"); //buscas validas: "incriveis", "carros", "alfa"
 			List<RealizacaoEvento> listaRealizEvento = RealizacaoEventoBO.consultaRealizEventoPorNomeEvento(nomeEvento);
 
 			if (!listaRealizEvento.isEmpty()) {
