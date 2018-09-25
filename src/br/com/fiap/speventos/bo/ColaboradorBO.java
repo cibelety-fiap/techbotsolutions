@@ -21,8 +21,9 @@ public class ColaboradorBO {
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a insercao de um novo Colaborador 
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario, tamanho do nivel de acesso,
-	 * tamanho do nome do departamento 
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
+	 * O nivel de acesso deve ter entre 1 e 30 caracteres
+	 * O nome do departamento deve ter entre 1 e 60 caracteres
 	 * @author Techbot Solutions
 	 * @param ColaboradorBO recebe objetos do tipo Colaborador e Usuario
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
@@ -54,8 +55,12 @@ public class ColaboradorBO {
 			return "Usuario ja existe";
 		}
 
-		String cadastroUsuario = UsuarioBO.novoUsuario(new Usuario(colaborador.getCodigoUsuario(), colaborador.getEmail(),
-				colaborador.getSenha(), colaborador.getNome()));
+		String cadastroUsuario = UsuarioBO.novoUsuario(
+				new Usuario(
+						colaborador.getCodigoUsuario(), 
+						colaborador.getEmail(),
+						colaborador.getSenha(), 
+						colaborador.getNome()));
 		if(!cadastroUsuario.equals("1 registro cadastrado")) {
 			dao.fechar();
 			return "Erro no cadastro do usuario";
@@ -122,8 +127,9 @@ public class ColaboradorBO {
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a edicao de um Colaborador 
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario, tamanho do nivel de acesso,
-	 * tamanho do nome do departamento 
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
+	 * O nivel de acesso deve ter entre 1 e 30 caracteres
+	 * O nome do departamento deve ter entre 1 e 60 caracteres
 	 * @author Techbot Solutions
 	 * @param colaborador recebe um objeto do tipo Colaborador
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
@@ -156,8 +162,12 @@ public class ColaboradorBO {
 			return "Usuario ja existe";
 		}
 
-		String edicaoUsuario = UsuarioBO.edicaoUsuario(new Usuario(colaborador.getCodigoUsuario(), colaborador.getEmail(),
-				colaborador.getSenha(), colaborador.getNome()));
+		String edicaoUsuario = UsuarioBO.edicaoUsuario(
+				new Usuario(
+						colaborador.getCodigoUsuario(), 
+						colaborador.getEmail(),
+						colaborador.getSenha(), 
+						colaborador.getNome()));
 		if(!edicaoUsuario.equals("1 registro editado")) {
 			dao.fechar();
 			return "Erro na edicao do usuario";
@@ -172,7 +182,7 @@ public class ColaboradorBO {
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a remocao de um colaborador
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
 	 * @author Techbot Solutions
 	 * @param codigoUsuario recebe um int
 	 * @return uma String com a quantidade de registros removidos ou o erro ocorrido

@@ -1,4 +1,4 @@
-<%@include file="imports/cabeca.jsp" %>
+<%@include file="../imports/cabecaDentroPasta.jsp" %>
 
 	<nav>
 		<div class="menu_lateral">
@@ -16,4 +16,4 @@
         </div>
       </nav>
 
-      <%@include file="imports/rodape.jsp" %>
+      <%@include file="../imports/rodapeDentroPasta.jsp" %>

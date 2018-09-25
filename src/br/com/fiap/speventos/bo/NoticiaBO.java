@@ -28,11 +28,11 @@ public class NoticiaBO {
 	 * A categoria da noticia deve ter de 1 a 30 caracteres
 	 * a data da atualizacao de noticia deve ser valida,
 	 * A noticia deve ter de 1 a 2000 caracteres
-	 * O codigo da noticia nao poda se cadastrado caso ja exista o banco
+	 * O codigo da noticia nao pode ser cadastrado caso ja exista o banco
 	 * @author Techbot Solutions
 	 * @param noticia recebe um objeto do tipo Noticia (Beans)
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
-	 * @throws Exception - Chamada da exceção checked 
+	 * @throws Exception - Chamada da excecao Exception 
 	 *
 	 */
 
@@ -86,7 +86,7 @@ public class NoticiaBO {
 	 * O codigo de noticia deve ter entre 1 a 5 digitos
 	 * @param codigoNoticia recebe um objeto do tipo int
 	 * @return um construtor vazio
-	 * @throws Exception - Chamada da excecao checked
+	 * @throws Exception - Chamada da excecao Exception
 	 */
 	public Noticia consultaNoticiaPorCodigo(int codigoNoticia) throws Exception {
 
@@ -109,7 +109,7 @@ public class NoticiaBO {
 	 * O nome da noticia deve ter de 1 a 80 caracteres
 	 * @param nomeNoticia recebe um objeto do tipo String
 	 * @return uma lista com objetos do tipo Noticia 
-	 * @throws Exception - Chamada da exceção checked
+	 * @throws Exception - Chamada da excecao Exception
 	 */
 	public List<Noticia> consultaNoticiaPorNome(String nomeNoticia) throws Exception {
 		

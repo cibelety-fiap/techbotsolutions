@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*, br.com.fiap.speventos.beans.* "%>
+    
 <!DOCTYPE html>
 <html>
 
@@ -13,7 +15,7 @@
     <div class="container">
       <header>
         <h1 style="float: left;">SP Eventos</h1>
-        <a href="login.jsp"><img style="float: right; width: 60px;" src="img/user_login.png" /></a>
+        <a href="login/login.jsp"><img style="float: right; width: 60px;" src="img/user_login.png" /></a>
         <br />
         <br />
         <br />

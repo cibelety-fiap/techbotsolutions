@@ -4,11 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fiap.speventos.beans.Local;
+import br.com.fiap.speventos.beans.Noticia;
 import br.com.fiap.speventos.dao.LocalDAO;
+import br.com.fiap.speventos.dao.NoticiaDAO;
 
-
+/**
+ * Classe para validar e padronizar dados para a tabela T_SGE_LOCAL
+ * @version 1.0
+ * @since 1.0
+ * @author Techbot Solutions
+ * @see Local
+ * @see LocalDAO
+ *
+ */
 public class LocalBO {
 
+	/**
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a insercao de um novo Local
+	 * Regras de negocio validadas:
+	 * O codigo do local deve ter entre 1 a 5 digitos
+	 * O nome do local deve ter de 1 a 60 caracteres
+	 * O endereco do local deve ter de 1 a 100 caracteres
+	 * O codigo do local nao pode ser cadastrado caso ja exista o banco
+	 * @author Techbot Solutions
+	 * @param local recebe um objeto do tipo Local (Beans)
+	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
+	 * @throws Exception - Chamada da excecao Exception 
+	 *
+	 */
 	public static String novoLocal(Local local) throws Exception {
 		
 		if (local.getCodigoLocal() < 1 || local.getCodigoLocal() > 99999) {
@@ -38,6 +62,15 @@ public class LocalBO {
 		return retorno + " registro cadastrado";
 	}
 	
+	/**
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a consulta de um local por codigo
+	 * Regras de negocio validadas:
+	 * O codigo do local deve ter entre 1 a 5 digitos
+	 * @param codigoLocal recebe um objeto do tipo int
+	 * @return um construtor vazio
+	 * @throws Exception - Chamada da excecao Exception
+	 */
 	public static Local consultaLocalPorCodigo(int codLocal) throws Exception {
 		
 		if (codLocal < 1 || codLocal > 99999) {
@@ -52,6 +85,15 @@ public class LocalBO {
 		return retorno; 
 	}
 	
+	/**
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a consulta de um Local por nome
+	 * Regras de negocio validadas:
+	 * O nome do local deve ter de 1 a 60 caracteres
+	 * @param nomeLocal recebe um objeto do tipo String
+	 * @return uma lista com objetos do tipo Local 
+	 * @throws Exception - Chamada da excecao Exception
+	 */
 	public static List<Local> consultaLocalPorNome(String nomeLocal) throws Exception {
 
 		List<Local> listaLocal = new ArrayList<Local>();
@@ -71,6 +113,17 @@ public class LocalBO {
 		
 	}
 	
+	/**
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a edicao do Local
+	 * Regras de negocio validadas:
+	 * O codigo do local deve ter entre 1 a 5 digitos
+	 * O nome do local deve ter de 1 a 60 caracteres
+	 * O endereco do local deve ter de 1 a 100 caracteres
+	 * @param local recebe um objeto do tipo Local
+	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
+	 * @throws Exception - Chamada da excecao Exception
+	 */
 	public static String edicaoLocal(Local local) throws Exception {
 		
 		if (local.getCodigoLocal() < 1 || local.getCodigoLocal() > 99999) {
@@ -94,6 +147,15 @@ public class LocalBO {
 		return retorno + "registro editado";
 	}
 	
+	/**
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a remocao do Local
+	 * Regras de negocio validadas:
+	 * O codigo do local deve ter entre 1 a 5 digitos
+	 * @param codigoLocal recebe um objeto do tipo int
+	 * @return uma String com o numero de registros removidos
+	 * @throws Exception - Chamada da excecao Exception
+	 */
 	public static String remocaoLocal(int codLocal) throws Exception {
 		
 		if (codLocal < 1 || codLocal > 99999) {
@@ -114,7 +176,7 @@ public class LocalBO {
 	 * @author Techbot Solutions
 	 * @param nao ha parametros
 	 * @return um int com o numero do proximo codigo de local
-	 * @throws Exception - Chamada da exceção checked Exception
+	 * @throws Exception - Chamada da excecao Exception
 	 */
 	public static int consultaProxCodLocal() throws Exception {
 		LocalDAO dao = new LocalDAO();

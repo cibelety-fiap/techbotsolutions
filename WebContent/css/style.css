@@ -32,6 +32,42 @@ header, footer {
 	text-align: center;
 }
 
+/* tabela */
+.tabela {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #aaa;
+}
+
+.tabela td {
+	padding:1px 20px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #aaa;
+	color: #333;
+	background-color: #fff;
+}
+
+.tabela th {
+	padding: 4px 10px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #aaa;
+	color: #fff;
+	background-color: #f38630;
+}
+
+.tabela .conteudo {
+	background-color: #FCFBE3;
+	border-color: inherit;
+	text-align: center;
+	vertical-align: middle;
+}
+
 /* menu lateral */
 div.menu_lateral {
 	float: left;
@@ -53,31 +89,35 @@ button.menu_lateral:hover {
 
 a.menu_lateral {
 	text-align: center;
-	font-size: 14px;
 	background-color: #ddd;
 	color: black;
 	text-decoration: none;
+	font-size: 16px;
 }
 
 .texto_menu_lateral {
 	margin: auto;
-	width: 50%;
+	width: 80%;
 	border: 3px;
 	padding: 10px;
 }
 
-/* menu central*/
+/* menu central */
 div.menu_central {
+	float: none;
+	padding-left: 20%;
 	margin: 20px;
 	margin-bottom: 40px;
 }
 
 button.menu_central {
-	width: 180px;
+	width: 140px;
 	height: 35px;
 	display: block;
 	margin: 1px;
 	border: none;
+	font-size: 14px;
+	background-color: #ddd;
 }
 
 button.menu_central:hover {
@@ -87,16 +127,17 @@ button.menu_central:hover {
 a.menu_central {
 	text-align: center;
 	font-size: 14px;
-	background-color: #ddd;
+	background-color: #f38630;
 	color: black;
 	text-decoration: none;
 }
 
 .texto_menu_central {
 	margin: auto;
-	width: 50%;
+	width: 80%;
 	border: 3px;
 	padding: 10px;
+	color: white;
 }
 
 /*barra de pesquisa*/

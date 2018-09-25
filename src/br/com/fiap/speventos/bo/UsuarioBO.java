@@ -17,8 +17,10 @@ public class UsuarioBO {
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a insercao de um novo usuario 
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario, tamanho do nome do usuario,  tamanho do email do usuario,
-	 * se o email tem '@' ou '.', tamanho da senha
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
+	 * O nome do usuario deve ter entre 1 e 60 caracteres
+	 * O email do usuario deve ter entre 1 e 60 caracteres e deve conter '@' e '.'
+	 * A senha deve ter entre 8 e 20 digitos
 	 * @author Techbot Solutions
 	 * @param usuario recebe um objeto do tipo Usuario
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
@@ -56,46 +58,16 @@ public class UsuarioBO {
 		return retorno;
 	}
 
-	/**
-	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
-	 * relacionadas ao login de um usuario 
-	 * Regras de negocio validadas:
-	 * tamanho do email do usuario, se o email tem '@' ou '.' e tamanho da senha
-	 * @author Techbot Solutions
-	 * @param email recebe uma String
-	 * @param senha recebe uma String
-	 * @return um objeto do tipo Usuario
-	 * @throws Exception - Chamada da excecao Exception
-	 */
-	public static Usuario login(String email, String senha) throws Exception{
 
-		if(email.isEmpty() || email.length()>60) {
-			return new Usuario();
-		}
-
-		if(email.indexOf("@")<0 || email.indexOf(".")<0) {
-			return new Usuario();
-		}
-
-		if(senha.length()<8 || senha.length()>20) {
-			return new Usuario();
-		}
-
-		email = email.toUpperCase();
-
-		UsuarioDAO dao = new UsuarioDAO();
-		Usuario usuario = dao.logar(email, senha);
-		dao.fechar();
-
-		return usuario;
-	}
 
 	/**
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a edicao de um usuario 
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario, tamanho do nome do usuario, tamanho do email do usuario,
-	 * se o email tem '@' ou '.', tamanho da senha
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
+	 * O nome do usuario deve ter entre 1 e 60 caracteres
+	 * O email do usuario deve ter entre 1 e 60 caracteres e deve conter '@' e '.'
+	 * A senha deve ter entre 8 e 20 digitos
 	 * @author Techbot Solutions
 	 * @param usuario recebe um objeto do tipo Usuario
 	 * @return uma String com a quantidade de registros editados ou o erro ocorrido
@@ -138,7 +110,7 @@ public class UsuarioBO {
 	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
 	 * relacionadas a remocao de um usuario 
 	 * Regras de negocio validadas:
-	 * tamanho do codigo do usuario
+	 * O codigo do usuario deve ter entre 1 a 5 digitos
 	 * @author Techbot Solutions
 	 * @param codigoUsuario recebe um int
 	 * @return uma String com a quantidade de registros removidos ou o erro ocorrido
@@ -156,5 +128,40 @@ public class UsuarioBO {
 
 		dao.fechar();
 		return retorno;
+	}
+	
+	/**
+	 * Metodo para verificar regras de negocio, validacoes e padronizacoes 
+	 * relacionadas ao login de um usuario 
+	 * Regras de negocio validadas:
+	 * O nome do usuario deve ter entre 1 e 60 caracteres
+	 * O email do usuario deve ter entre 1 e 60 caracteres e deve conter '@' e '.'
+	 * A senha deve ter entre 8 e 20 digitos	 * @author Techbot Solutions
+	 * @param email recebe uma String
+	 * @param senha recebe uma String
+	 * @return um objeto do tipo Usuario
+	 * @throws Exception - Chamada da excecao Exception
+	 */
+	public static Usuario login(String email, String senha) throws Exception{
+
+		if(email.isEmpty() || email.length()>60) {
+			return new Usuario();
+		}
+
+		if(email.indexOf("@")<0 || email.indexOf(".")<0) {
+			return new Usuario();
+		}
+
+		if(senha.length()<4 || senha.length()>20) {
+			return new Usuario();
+		}
+
+		email = email.toUpperCase();
+		
+		UsuarioDAO dao = new UsuarioDAO();
+		Usuario usuario = dao.logar(email, senha);
+		dao.fechar();
+
+		return usuario;
 	}
 }

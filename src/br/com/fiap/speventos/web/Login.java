@@ -32,8 +32,8 @@ public class Login extends HttpServlet {
 
 			Usuario usuario = UsuarioBO.login(email, senha);
 
-			if (usuario.getEmail() == null) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("loginErro.jsp");
+			if (usuario.getCodigoUsuario() == 0) {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("login/loginErro.jsp");
 				dispatcher.forward(request, response);
 			} else {
 				request.setAttribute("usuario", usuario);					
@@ -43,13 +43,13 @@ public class Login extends HttpServlet {
 				Colaborador colaborador = ColaboradorBO.consultaColaboradorPorCodigo(usuario.getCodigoUsuario());	
 				
 				if (colaborador.getCodigoUsuario() > 0) {		
-					RequestDispatcher dispatcher = request.getRequestDispatcher("tela_colaborador.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("login/telaColaborador.jsp");
 					dispatcher.forward(request, response);
 					
 				} else {
 					
 
-					RequestDispatcher dispatcher = request.getRequestDispatcher("tela_pessoa.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("login/telaPessoa.jsp");
 					dispatcher.forward(request, response);	
 					writer.println(session.getId());
 					

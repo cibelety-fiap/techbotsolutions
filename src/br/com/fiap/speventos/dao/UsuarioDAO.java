@@ -78,37 +78,7 @@ public class UsuarioDAO {
 		return stmt.executeUpdate();
 	}
 
-	/**
-	 * Metodo para logar o usuario, consulta por email e senha
-	 * um registro na tabela T_SGE_USUARIO 
-	 * @author Techbot Solutions
-	 * @param email recebe uma String
-	 * @param senha recebe uma String
-	 * @return um objeto do tipo Usuario
-	 * @throws Exception - Chamada da excecao Exception
-	 */
-	public Usuario logar(String email, String senha) throws Exception {
-		stmt = con.prepareStatement(
-				"SELECT CD_USUARIO, DS_EMAIL, DS_SENHA, NM_USUARIO "
-				+ "FROM T_SGE_USUARIO "
-				+ "WHERE DS_EMAIL=? AND DS_SENHA=?");
 
-		stmt.setString(1, email);
-		stmt.setString(2, senha);
-
-		rs = stmt.executeQuery();
-
-		if(rs.next()) {
-			return new Usuario(
-					rs.getInt("CD_USUARIO"),
-					rs.getString("DS_EMAIL"),
-					rs.getString("DS_SENHA"),
-					rs.getString("NM_USUARIO")
-					);
-		} else {
-			return new Usuario();
-		}
-	}
 
 	/**
 	 * Metodo para remover um registro na tabela T_SGE_USUARIO
@@ -135,5 +105,38 @@ public class UsuarioDAO {
 	 */
 	public void fechar() throws Exception {
 		con.close();
+	}
+	
+	/**
+	 * Metodo para logar o usuario, consulta por email e senha
+	 * um registro na tabela T_SGE_USUARIO 
+	 * @author Techbot Solutions
+	 * @param email recebe uma String
+	 * @param senha recebe uma String
+	 * @return um objeto do tipo Usuario
+	 * @throws Exception - Chamada da excecao Exception
+	 */
+	public Usuario logar(String email, String senha) throws Exception {
+//		System.out.println(email + " " + senha);
+		stmt = con.prepareStatement(
+				"SELECT CD_USUARIO, DS_EMAIL, DS_SENHA, NM_USUARIO "
+				+ "FROM T_SGE_USUARIO "
+				+ "WHERE DS_EMAIL=? AND DS_SENHA=?");
+
+		stmt.setString(1, email);
+		stmt.setString(2, senha);
+
+		rs = stmt.executeQuery();
+
+		if(rs.next()) {
+			return new Usuario(
+					rs.getInt("CD_USUARIO"),
+					rs.getString("DS_EMAIL"),
+					rs.getString("DS_SENHA"),
+					rs.getString("NM_USUARIO")
+					);
+		} else {
+			return new Usuario();
+		}
 	}
 }

@@ -131,7 +131,7 @@ function validar(form) {
 		return false;
 	}
 	if (endereco == "") {
-		alert('DIGITE O ENDEREÇO');
+		alert('DIGITE O ENDERECO');
 		form.endereco.focus();
 		return false;
 	}

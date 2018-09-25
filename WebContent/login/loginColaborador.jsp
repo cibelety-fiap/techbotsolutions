@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*, br.com.fiap.speventos.beans.* "%>
 <!DOCTYPE html>
 <html>
 
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style><%@include file="../css/style.css" %></style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>SP Eventos</title>
   </head>
 
@@ -14,20 +14,20 @@
     <div class="container">
       <header>
         <h1 style="float: left;">SP Eventos</h1>
-        <a href="../login/login.jsp"><img style="float: right; width: 60px;" src="../img/user_login.png" /></a>
+        <a href="login.html"><img style="float: right; width: 60px;" src="img/user.png" /></a>
         <br />
         <br />
         <br />
       </header>
       <div class="topnav" id="myTopnav">
-        <a href="../index.jsp">Home</a>
+        <a href="index.html">Home</a>
         <div class="dropdown">
           <button class="dropbtn">Cinema
 						  <i class="fa fa-caret-down"></i>
 						</button>
           <div class="dropdown-content">
-            <a href="../filmes_em_cartaz.jsp">Em cartaz</a>
-            <a href="../proximos_lancamentos.jsp">Pr&oacute;ximos lan&ccedil;amentos</a>
+            <a href="filmes_em_cartaz.html">Em cartaz</a>
+            <a href="proximos_lançamentos.html">Próximos lançamentos</a>
           </div>
         </div>
         <div class="dropdown">
@@ -35,8 +35,8 @@
 						  <i class="fa fa-caret-down"></i>
 						</button>
           <div class="dropdown-content">
-            <a href="../proximos_shows.jsp">Pr&oacute;ximos shows</a>
-            <a href="../mais_esperados_ano.jsp">Mais esperados do ano</a>
+            <a href="proximos_shows.html">Próximos shows</a>
+            <a href="mais_esperados_ano.html">Mais esperados do ano</a>
           </div>
         </div>
         <div class="dropdown">
@@ -44,23 +44,29 @@
 					      <i class="fa fa-caret-down"></i>
 					    </button>
           <div class="dropdown-content">
-            <a href="../teatro_em_cartaz.jsp">Em cartaz</a>
+            <a href="teatro_em_cartaz.html">Em cartaz</a>
           </div>
         </div>
-        <a href="contato.jsp">Contato</a>
-        <a href="chatbot.jsp" target="_blank" class="active">Chatbot</a>
+        <a href="contato.html">Contato</a>
         <div class="search-container">
           <form>
-            <img src="../img/search.png" alt="" id="lupa">
+            <img src="img/search.png" alt="" id="lupa">
             <input type="search" placeholder="Pesquisa" name="search">
           </form>
         </div>
         <a href="javascript:void(0); " style="font-size:15px; " class="icon " onclick="myFunction() ">&#9776;</a>
       </div>
-<!--      
-      <nav>
-		<div class="menu_lateral">
-			<button onclick="goBack()" class="menu_lateral">Voltar</button>
-		</div>
-	</nav>
--->
+        <article style="float:right;padding-right: 30%;">
+          <p>
+           Olá, ${usuario.nome}.
+           
+           Bem vindo(a) ao nosso site!
+          </p>
+        </article>
+        <footer>Copyright &copy; 2018 SP Eventos </footer>
+    </div>
+<!--  remover javascript -->
+
+    </body>
+
+</html>
