@@ -7,6 +7,7 @@ import br.com.fiap.speventos.beans.RealizacaoEvento;
 import br.com.fiap.speventos.bo.EventoBO;
 import br.com.fiap.speventos.bo.LocalBO;
 import br.com.fiap.speventos.bo.RealizacaoEventoBO;
+import br.com.fiap.speventos.dao.RealizacaoEventoDAO;
 import br.com.fiap.speventos.excecao.Excecao;
 import br.com.fiap.speventos.view.Magica;
 
@@ -16,10 +17,14 @@ public class Funcionalidade1 {
 
 		try {	
 
-			int codigoRealizEvento = Magica.inteiro("Codigo da Realizacao do Evento");
+			int codigoRealizEvento = 0;
 			int codEvento = Magica.inteiro("Codigo do Evento");
 			int codLocal = Magica.inteiro("Codigo Local");
-			
+
+			RealizacaoEventoDAO dao = new RealizacaoEventoDAO();
+			codigoRealizEvento = dao.calcularCodRealizEvento();
+			System.out.println(codigoRealizEvento);
+	
 			Local local = LocalBO.consultaLocalPorCodigo(codLocal);
 			if (local.getCodigoLocal()==0) {
 				JOptionPane.showMessageDialog(null, "Local não encontrado, preencha os próximos dados.");
@@ -38,8 +43,7 @@ public class Funcionalidade1 {
 					dataHoraTermino
 				);
 			
-			System.out.println(RealizacaoEventoBO.novaRealizacaoEvento(realizacaoEvento2));
-			
+			System.out.println(RealizacaoEventoBO.novaRealizacaoEvento(realizacaoEvento2));			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(Excecao.tratarExcecao(e));

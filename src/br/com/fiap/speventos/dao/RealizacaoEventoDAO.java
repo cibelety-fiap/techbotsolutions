@@ -39,6 +39,36 @@ public class RealizacaoEventoDAO {
 	}
 
 	/**
+	  * Metodo para calcular o proximo codigo de realizacao de evento a ser inserido,
+	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
+	  * @author Techbot Solutions
+	  * @param realizacaoEvento recebe um objeto do tipo RealizacaoEvento (Beans)
+	  * @return um int com a quantidade de registros inseridos
+	  * @throws Exception - Chamada da excecao Exception
+	  */
+	public int calcularCodRealizEvento() throws Exception {
+		int proxCodigo = 0;
+		int qtCodRealizEvento = 0;
+		
+		stmt = con.prepareStatement("SELECT COUNT(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
+
+		rs = stmt.executeQuery();
+		if (rs.next()) {
+			qtCodRealizEvento= rs.getInt("COUNT(CD_REALIZ_EVENTO)");
+			if (qtCodRealizEvento == 0) {
+				proxCodigo = 1;
+			} else {			
+				stmt = con.prepareStatement("SELECT MAX(CD_REALIZ_EVENTO) FROM T_SGE_REALIZACAO_EVENTO");
+				rs = stmt.executeQuery();
+				if (rs.next()) {
+					proxCodigo = rs.getInt("MAX(CD_REALIZ_EVENTO)") + 1;
+				}
+			}
+		}
+		return proxCodigo;
+	}
+	
+	/**
 	  * Metodo para adicionar um registro na tabela T_SGE_REALIZACAO_EVENTO
 	  * @author Techbot Solutions
 	  * @param realizacaoEvento recebe um objeto do tipo RealizacaoEvento (Beans)
@@ -123,7 +153,7 @@ public class RealizacaoEventoDAO {
 								+ "(T_SGE_REALIZACAO_EVENTO.CD_EVENTO=T_SGE_EVENTO.CD_EVENTO) " 
 								+ "INNER JOIN T_SGE_LOCAL ON "
 								+ "(T_SGE_REALIZACAO_EVENTO.CD_LOCAL=T_SGE_LOCAL.CD_LOCAL) " 
-								+ "WHERE T_SGE_EVENTO.NM_EVENTO LIKE ?");
+								+ "WHERE UPPER(T_SGE_EVENTO.NM_EVENTO) LIKE ?");
 
 		stmt.setString(1, "%" + nomeEvento + "%");
 
