@@ -121,6 +121,21 @@ public class RealizacaoEventoBO {
 		
 		return listaRealizacaoEvento;
 	}
+	
+	public static List<RealizacaoEvento> consultaRealizEventoPorCodEvento(int codEvento) throws Exception {
+
+		List<RealizacaoEvento> listaRealizacaoEvento = new ArrayList<RealizacaoEvento>();
+
+		if (codEvento < 1 || codEvento > 99999 ) {
+			return listaRealizacaoEvento;
+		}
+		
+		RealizacaoEventoDAO dao = new RealizacaoEventoDAO();
+		listaRealizacaoEvento = dao.consultarPorCodEvento(codEvento);
+		dao.fechar();
+		
+		return listaRealizacaoEvento;
+	}
 
 	public static String edicaoRealizacaoEvento(RealizacaoEvento realizacaoEvento, int codRealizEvento) throws Exception {
 		
