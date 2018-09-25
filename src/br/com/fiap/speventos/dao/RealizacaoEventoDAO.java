@@ -196,7 +196,8 @@ public class RealizacaoEventoDAO {
 	public int editar(RealizacaoEvento realizacaoEvento) throws Exception {
 		stmt = con.prepareStatement("UPDATE T_SGE_REALIZACAO_EVENTO "
 				+ "SET CD_REALIZ_EVENTO=?, CD_EVENTO=?, CD_LOCAL=?, "
-				+ "DT_HR_INICIO =?, DT_HR_TERMINO=? " 
+				+ "DT_HR_INICIO=TO_DATE(?,\'DD/MM/YYYY HH24:MI\'), "
+				+ "DT_HR_TERMINO=TO_DATE(?,\'DD/MM/YYYY HH24:MI\') " 
 				+ "WHERE CD_REALIZ_EVENTO = ?");
 
 		stmt.setInt(1, realizacaoEvento.getCodigoRealizacaoEvento());
@@ -217,7 +218,6 @@ public class RealizacaoEventoDAO {
 	  * @throws Exception - Chamada da excecao Exception
 	  */	
 	public int remover(int codRealizEvento) throws Exception {
-
 		stmt = con.prepareStatement("DELETE FROM T_SGE_REALIZACAO_EVENTO " 
 				+ "WHERE CD_REALIZ_EVENTO=?");
 		stmt.setInt(1, codRealizEvento);

@@ -16,10 +16,7 @@ import br.com.fiap.speventos.beans.RealizacaoEvento;
 import br.com.fiap.speventos.bo.EventoBO;
 import br.com.fiap.speventos.bo.LocalBO;
 import br.com.fiap.speventos.bo.RealizacaoEventoBO;
-import br.com.fiap.speventos.dao.LocalDAO;
-import br.com.fiap.speventos.dao.RealizacaoEventoDAO;
 import br.com.fiap.speventos.excecao.Excecao;
-import br.com.fiap.speventos.view.Magica;
 
 @WebServlet("/RealizacaoEventoServlet")
 public class RealizacaoEventoServlet extends HttpServlet {
@@ -142,47 +139,58 @@ public class RealizacaoEventoServlet extends HttpServlet {
 	private void editarRealizacaoEvento(HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 			
-			int codigoRealizacaoEvento = RealizacaoEventoBO.consultaProxCodRealizEvento();
+			int codigoRealizEvento = Integer.parseInt(request.getParameter("codigoRealizEvento"));
 			int codigoEvento = Integer.parseInt(request.getParameter("codigoEvento"));
 			int codigoLocal = Integer.parseInt(request.getParameter("codigoLocal"));
+			
 			String dataHoraInicio = request.getParameter("dataInicio") + " " + request.getParameter("horaInicio") ;
 			String dataHoraTermino = request.getParameter("dataTermino") + " " + request.getParameter("horaTermino") ;
-			System.out.println(dataHoraInicio);
-			System.out.println(dataHoraTermino);
+			String nomeLocal = request.getParameter("nomeLocal");
+			String enderecoLocal = request.getParameter("enderecoLocal");
 			String cadastroLocal = "";
+				
+			RealizacaoEvento realizEventoAntigo = RealizacaoEventoBO.consultaRealizEventoPorCodigo(codigoRealizEvento);
+			
+			String nomeLocalAntigo = realizEventoAntigo.getLocal().getNomeLocal();
+			String enderecoLocalAntigo = realizEventoAntigo.getLocal().getEnderecoLocal();
+			
+			Evento evento = EventoBO.consultaEvento(codigoEvento);
 			
 			Local local = new Local();
 			
-			Evento evento = EventoBO.consultaEvento(codigoEvento);
-			 
 			Local consultaLocal = LocalBO.consultaLocalPorCodigo(codigoLocal);	
-			if (consultaLocal.getCodigoLocal()==0) {
+			
+			if (!nomeLocal.equals(nomeLocalAntigo) || !enderecoLocal.equals(enderecoLocalAntigo)) {
 				codigoLocal = LocalBO.consultaProxCodLocal();
-				local = new Local(codigoLocal, request.getParameter("nomeLocal"), request.getParameter("enderecoLocal"));
+				local = new Local(codigoLocal, nomeLocal, enderecoLocal);
 				System.out.println(local.getCodigoLocal());
-				cadastroLocal = LocalBO.novoLocal(local);
+				cadastroLocal = LocalBO.edicaoLocal(local);
+				System.out.println(cadastroLocal);
 			} else {
 				local = consultaLocal;
 			}
-				
-			if (cadastroLocal.equals("1 registro cadastrado") || cadastroLocal.isEmpty()) {
+			
+			if (cadastroLocal.equals("1 registro editado") || cadastroLocal.isEmpty()) {
 				RealizacaoEvento realizacaoEvento = new RealizacaoEvento(
-						codigoRealizacaoEvento, evento, local, dataHoraInicio, dataHoraTermino);
-				System.out.println(RealizacaoEventoBO.novaRealizacaoEvento(realizacaoEvento));
+						codigoRealizEvento, evento, local, dataHoraInicio, dataHoraTermino);
+				System.out.println(RealizacaoEventoBO.edicaoRealizacaoEvento(realizacaoEvento));
 			}
 				
 			RequestDispatcher dispatcher = 
-					request.getRequestDispatcher("RealizacaoEventoServlet?comando=listar");
+					request.getRequestDispatcher("RealizacaoEventoServlet?comando=listar&codEvento=" + codigoEvento);
 			dispatcher.forward(request, response);
 	}
 
 	private void removerRealizacaoEvento(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 
-			int codEvento = Integer.parseInt(request.getParameter("codEvento"));
+		int codRealizEvento = Integer.parseInt(request.getParameter("codRealizEvento"));
+		int codigoEvento = Integer.parseInt(request.getParameter("codigoEvento"));
 			
-			EventoBO.remocaoEvento(codEvento);
-			
-			listarRealizacaoEvento(request, response);
-		}
+		System.out.println(RealizacaoEventoBO.remocaoRealizacaoEvento(codRealizEvento));
+		
+		RequestDispatcher dispatcher = 
+				request.getRequestDispatcher("RealizacaoEventoServlet?comando=listar&codEvento=" + codigoEvento);
+		dispatcher.forward(request, response);
+	}
 }

@@ -31,7 +31,7 @@
 		<input id="horaTermino" type="text" name="horaTermino" value=""><br><br>
 		<br /><hr><br />
 		<label>Nome local:</label><br />
-		<input type="text" name="nomeLocal" value="" maxlength="100"> <button>Buscar</button><br/><br />
+		<input type="text" name="nomeLocal" value="" maxlength="100"><br /><br />
 		<label>Endere&ccedil;o:</label><br />
 
 		<textarea rows="4" name="enderecoLocal"></textarea><br /><br /><br />

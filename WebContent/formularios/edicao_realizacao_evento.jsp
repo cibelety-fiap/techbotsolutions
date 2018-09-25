@@ -1,4 +1,4 @@
-<%@ include file="../imports/cabecaDentroPasta.jsp" %>
+<%@ include file="../imports/cabeca.jsp" %>
 <%
 	RealizacaoEvento realizacaoEvento = (RealizacaoEvento) request.getAttribute("REALIZACAO_EVENTO");
 %>
@@ -8,17 +8,18 @@
 	<h1>Nova Realizacao do Evento</h1>
 		<br><br>
 	
-	<form action="../RealizacaoEventoServlet" method="GET">
+	<form action="RealizacaoEventoServlet" method="GET">
 		<input type="hidden" name="comando" value="editar" /> 
-		<input type="hidden" name="codigoEvento" value="<%=realizacaoEvento.getCodigoRealizacaoEvento()%>" />
-		<input type="hidden" name="codigoLocal" value="0" />
+		<input type="hidden" name="codigoRealizEvento" value="<%=realizacaoEvento.getCodigoRealizacaoEvento()%>" />
+		<input type="hidden" name="codigoEvento" value="<%=realizacaoEvento.getEvento().getCodigoEvento()%>" />
+		<input type="hidden" name="codigoLocal" value="<%=realizacaoEvento.getLocal().getCodigoLocal()%>" />
 		<label>Data de in&iacute;cio:</label>
 		<br>
 		<input id="dataInicio" type="text" name="dataInicio" value="<%=realizacaoEvento.getDataHoraInicio().substring(0,10)%>">
 		<br><br>
 		<label>Hora de in&iacute;cio:</label>
 		<br>
-		<input id="horaInicio" type="text" name="horaInicio" value="<%=realizacaoEvento.getDataHoraInicio().substring(10,16)%>">
+		<input id="horaInicio" type="text" name="horaInicio" value="<%=realizacaoEvento.getDataHoraInicio().substring(11,16)%>">
 		<br><br>
 		<label>Data de t&eacute;rmino:</label>
 		<br>
@@ -26,20 +27,20 @@
 		<br><br>
 		<label>Hora de t&eacute;rmino:</label>
 		<br>
-		<input id="horaTermino" type="text" name="horaTermino" value="<%=realizacaoEvento.getDataHoraTermino().substring(10,16)%>"><br><br>
+		<input id="horaTermino" type="text" name="horaTermino" value="<%=realizacaoEvento.getDataHoraTermino().substring(11,16)%>"><br><br>
 		<br /><hr><br />
 		<label>Nome local:</label><br />
-		<input type="text" name="nomeLocal" value="<%=realizacaoEvento.getLocal().getNomeLocal()%>" maxlength="100">
+		<input type="text" name="nomeLocal" value="<%=realizacaoEvento.getLocal().getNomeLocal()%>" maxlength="100"><br /><br />
 		<label>Endere&ccedil;o:</label><br />
 
 		<textarea rows="4" name="enderecoLocal"><%=realizacaoEvento.getLocal().getEnderecoLocal()%></textarea><br /><br /><br />
-		<button class="tamanho_botao">Enviar</button>
+		<button class="tamanho_botao">Editar</button>
 		<input type="reset" name="reset" value="Reset" class="tamanho_botao">
 	</form>
 
 	</div>
 	
-<%@ include file="../imports/rodapeDentroPasta.jsp" %>
+<%@ include file="../imports/rodape.jsp" %>
 
 	<script>
 $(document).ready(function() {

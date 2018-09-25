@@ -8,9 +8,9 @@
       </nav>
 <article style="float: right; padding-right: 30%;">
 	<p>
-		Olá, ${usuario.nome}. Bem vindo(a) ao nosso site! <br /> Na
-		sua tela você pode ver os seus Eventos, cadastrar e editar novas
-		Realizações de Eventos.
+		Olá, ${usuario.nome}! <br /><br />
+		Na sua tela você pode ver os seus Eventos.<br /><br />
+		Tamb&eacute;m pode visualizar, editar e remover as suas Realizações de Eventos.
 	</p>
 </article>
 <%@ include file="../imports/rodape.jsp"%>

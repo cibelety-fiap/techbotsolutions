@@ -22,7 +22,6 @@
 				<th class="tabelaHead">Tipo</th>
 				<th class="tabelaHead">Genero</th>
 				<th class="tabelaHead">Descricao</th>
-				<th class="tabelaHead" colspan="2">Acoes</th>
 			</tr>
 
 
@@ -36,12 +35,6 @@
 				<td class="conteudo"><%=eventoTemp.getSubtipoEvento()%></td>
 				<td class="conteudo"><%=eventoTemp.getDescricaoEvento().substring(0, 40)%>
 					(...)</td>
-				<td class="conteudo"><button onclick="location.href='edicaoEvento.jsp'" type="button"><img
-						src="img/pen.png" id="icons"></a></td>
-				<td class="conteudo"><button onclick="okOrCancel()" type="button">
-						<img src="img/delete-remove.png" id="icons">
-					</button></td>
-
 			</tr>
 				<%
 					}

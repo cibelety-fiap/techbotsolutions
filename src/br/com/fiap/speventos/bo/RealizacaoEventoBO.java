@@ -186,7 +186,7 @@ public class RealizacaoEventoBO {
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
 	 * @throws Exception - Chamada da excecao Exception
 	 */
-	public static String edicaoRealizacaoEvento(RealizacaoEvento realizacaoEvento, int codRealizEvento) throws Exception {
+	public static String edicaoRealizacaoEvento(RealizacaoEvento realizacaoEvento) throws Exception {
 
 		if (realizacaoEvento.getCodigoRealizacaoEvento() < 1 || 
 				realizacaoEvento.getCodigoRealizacaoEvento() > 99999) {
@@ -217,7 +217,7 @@ public class RealizacaoEventoBO {
 
 		RealizacaoEventoDAO dao = new RealizacaoEventoDAO();
 
-		Evento eventoExiste = EventoBO.consultaEvento(realizacaoEvento.getCodigoRealizacaoEvento());
+		Evento eventoExiste = EventoBO.consultaEvento(realizacaoEvento.getEvento().getCodigoEvento());
 
 		if(eventoExiste.getCodigoEvento() == 0) {
 			return "Evento relacionado a realizacao de evento nao existe";
@@ -225,7 +225,7 @@ public class RealizacaoEventoBO {
 
 		Local localExiste = LocalBO.consultaLocalPorCodigo(realizacaoEvento.getLocal().getCodigoLocal());
 
-		String localValido = null;
+		String localValido = "";
 
 		if(localExiste.getCodigoLocal() == 0) {
 			//o usuario nao pode editar o local, somente adicionar um novo com valores alterados
@@ -234,8 +234,8 @@ public class RealizacaoEventoBO {
 
 		String retorno = null;
 
-		if(localValido.equals("1 registro inserido") || localValido.equals(null)) {
-			retorno = dao.cadastrar(realizacaoEvento) + " registro editado";
+		if(localValido.equals("1 registro inserido") || localValido.isEmpty()) {
+			retorno = dao.editar(realizacaoEvento) + " registro editado";
 		}
 
 		dao.fechar();
@@ -270,7 +270,7 @@ public class RealizacaoEventoBO {
 	 * @author Techbot Solutions
 	 * @param nao ha parametros
 	 * @return um int com o numero do proximo codigo de realizacao de evento
-	 * @throws Exception - Chamada da exceção Exception
+	 * @throws Exception - Chamada da excecao Exception
 	 */
 	public static int consultaProxCodRealizEvento() throws Exception {
 		RealizacaoEventoDAO dao = new RealizacaoEventoDAO();

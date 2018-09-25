@@ -34,11 +34,12 @@
 
 		<%
 			for (RealizacaoEvento realizacaoEventoTemp : listaRealizacaoEvento) {
+				int codRealizEvento = realizacaoEventoTemp.getCodigoRealizacaoEvento();
 		%>
 
 		<tr>
 			<td class="conteudo"><a
-				href="RealizacaoEventoServlet?comando=carregar&tipoCarregamento=leitura&codRealizEvento=<%=realizacaoEventoTemp.getCodigoRealizacaoEvento()%>"><%=realizacaoEventoTemp.getEvento().getNomeEvento()%></a></td>
+				href="RealizacaoEventoServlet?comando=carregar&tipoCarregamento=leitura&codRealizEvento=<%=codRealizEvento%>"><%=realizacaoEventoTemp.getEvento().getNomeEvento()%></a></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getDataHoraInicio()%></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getDataHoraTermino()%></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getLocal().getNomeLocal()%>
@@ -48,10 +49,13 @@
 						<img src="img/pen.png" id="icons">
 				</button>
 			</td>
-			<td class="conteudo">
-				<button onclick="okOrCancel()">
-					<img src="img/delete-remove.png" id="icons">
-				</button>
+			<td class="conteudo">							
+				<a href="/techbotSolutions/RealizacaoEventoServlet?comando=remover&codRealizEvento=<%=codRealizEvento%>&codigoEvento=<%=codigoEvento%>"
+							onclick="if (!(confirm('Voce tem certeza que deseja apagar?'))) return false">
+					<button>			
+						<img src="img/delete-remove.png" id="icons">
+					</button>
+				</a>
 			</td>
 		</tr>
 		<%
