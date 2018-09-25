@@ -3,7 +3,13 @@
 <%
 	List<Evento> listaEvento = (List<Evento>) request.getAttribute("LISTA_EVENTO");
 %>
-
+<nav>
+        <br />
+        <div class="menu_lateral">
+          <div><button onclick="goBack()" class="menu_lateral">Voltar</button></div>
+          <div><a class="menu_lateral" href="Logout"><button class="menu_lateral">Sair</button></a></div>
+        </div>
+      </nav>
 	<div class="menu_central">
 
 		<h1>Eventos</h1>

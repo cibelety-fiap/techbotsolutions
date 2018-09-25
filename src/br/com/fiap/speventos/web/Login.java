@@ -36,13 +36,14 @@ public class Login extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("login/loginErro.jsp");
 				dispatcher.forward(request, response);
 			} else {
-				request.setAttribute("usuario", usuario);					
 				HttpSession session = request.getSession();
+				session.setAttribute("usuario", usuario);
+				session.setAttribute("codigoUsuario", usuario.getCodigoUsuario());
 				System.out.println(session.getId());
 				
 				Colaborador colaborador = ColaboradorBO.consultaColaboradorPorCodigo(usuario.getCodigoUsuario());	
 				
-				if (colaborador.getCodigoUsuario() > 0) {		
+				if (colaborador.getCodigoUsuario() > 0) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("login/telaColaborador.jsp");
 					dispatcher.forward(request, response);
 					

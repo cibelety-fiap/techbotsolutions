@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.bo.EventoBO;
@@ -61,8 +62,10 @@ public class EventoServlet extends HttpServlet {
 
 	private void listarEvento(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-
-			List<Evento> listaEventos = EventoBO.consultaPorUsuario(37); //ALTERAR
+			HttpSession session = request.getSession(true);
+			int codigoUsuario = (int) session.getAttribute("codigoUsuario");
+			
+			List<Evento> listaEventos = EventoBO.consultaPorUsuario(codigoUsuario); //ALTERAR
 		
 			request.setAttribute("LISTA_EVENTO", listaEventos);
 					

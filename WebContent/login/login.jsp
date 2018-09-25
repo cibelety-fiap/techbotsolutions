@@ -9,7 +9,7 @@
             <br>
             <input type="password" placeholder="Senha" name="senha">
             <br><br>
-            <button>Enviar</button>
+            <button class="tamanho_botao">Enviar</button>
             <input type="reset" name="reset" value="Reset" class="tamanho_botao">
           </form>
           <br>

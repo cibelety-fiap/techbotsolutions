@@ -1,7 +1,7 @@
 <%@ include file="../imports/cabeca.jsp"%>
-        <article style="float:right;padding-right: 30%;">
+        <article >
           <p>
-           Usuário e/ou senha incorretos
+           Usu&aacute;rio deslogado!
           </p>
         </article>
  <%@ include file="../imports/rodape.jsp"%>
