@@ -38,6 +38,36 @@ public class LocalDAO {
 	}
 
 	/**
+	  * Metodo para calcular o proximo codigo de local a ser inserido,
+	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
+	  * @author Techbot Solutions
+	  * @param nao possui parametros
+	  * @return um int com o numero do proximo codigo a ser inserido
+	  * @throws Exception - Chamada da excecao Exception
+	  */
+	public int calcularCodLocal() throws Exception {
+		int proxCodigo = 0;
+		int qtCodLocal = 0;
+		
+		stmt = con.prepareStatement("SELECT COUNT(CD_LOCAL) FROM T_SGE_LOCAL");
+
+		rs = stmt.executeQuery();
+		if (rs.next()) {
+			qtCodLocal= rs.getInt("COUNT(CD_LOCAL)");
+			if (qtCodLocal == 0) {
+				proxCodigo = 1;
+			} else {			
+				stmt = con.prepareStatement("SELECT MAX(CD_LOCAL) FROM T_SGE_LOCAL");
+				rs = stmt.executeQuery();
+				if (rs.next()) {
+					proxCodigo = rs.getInt("MAX(CD_LOCAL)") + 1;
+				}
+			}
+		}
+		return proxCodigo;
+	}
+	
+	/**
 	  * Metodo para adicionar um registro na tabela T_SGE_LOCAL
 	  * @author Techbot Solutions
 	  * @param local recebe um objeto do tipo Local (Beans)

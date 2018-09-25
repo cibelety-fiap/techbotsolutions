@@ -42,8 +42,8 @@ public class RealizacaoEventoDAO {
 	  * Metodo para calcular o proximo codigo de realizacao de evento a ser inserido,
 	  * a solucao foi proposta pela Profa. Rita como alternativa (temporaria) ao auto-increment
 	  * @author Techbot Solutions
-	  * @param realizacaoEvento recebe um objeto do tipo RealizacaoEvento (Beans)
-	  * @return um int com a quantidade de registros inseridos
+	  * @param nao possui parametros
+	  * @return um int com o numero do proximo codigo a ser inseridos
 	  * @throws Exception - Chamada da excecao Exception
 	  */
 	public int calcularCodRealizEvento() throws Exception {
