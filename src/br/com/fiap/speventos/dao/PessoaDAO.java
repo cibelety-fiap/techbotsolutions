@@ -43,10 +43,11 @@ public class PessoaDAO {
 	public int cadastrar(Pessoa pessoa) throws Exception {
 
 		stmt = con.prepareStatement("INSERT INTO T_SGE_PESSOA "
-				+ "(NR_TELEFONE, DS_ENDERECO) VALUES (?, ?)");
+				+ "(CD_USUARIO, NR_TELEFONE, DS_ENDERECO) VALUES (?, ?, ?)");
 
-		stmt.setLong(1, pessoa.getTelefone());
-		stmt.setString(2, pessoa.getEndereco());
+		stmt.setLong(1, pessoa.getCodigoUsuario());
+		stmt.setLong(2, pessoa.getTelefone());
+		stmt.setString(3, pessoa.getEndereco());
 
 		return stmt.executeUpdate();
 	}
@@ -61,11 +62,12 @@ public class PessoaDAO {
 	public int editar(Pessoa pessoa) throws Exception {
 
 		stmt = con.prepareStatement("UPDATE T_SGE_PESSOA "
-				+ "SET NR_TELEFONE=?, DS_ENDERECO=? "
+				+ "SET CD_USUARIO=?, NR_TELEFONE=?, DS_ENDERECO=? "
 				+ "WHERE CD_PESSOA=?");
 
-		stmt.setString(1, "NR_TELEFONE");
-		stmt.setString(2, "DS_ENDENRECO");
+		stmt.setLong(1, pessoa.getCodigoUsuario());
+		stmt.setLong(2, pessoa.getTelefone());
+		stmt.setString(3, pessoa.getEndereco());
 
 		return stmt.executeUpdate();
 	}

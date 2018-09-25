@@ -23,8 +23,8 @@ import br.com.fiap.speventos.dao.AtualizacaoEventoDAO;
 public class AtualizacaoEventoBO {
 	
 	/**
-	 * Metodo responsavel por verificar regras de negócio, validacoes e padronizacoes
-	 * relacionadas a inserção de uma nova atualizacao de evento
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a insercao de uma nova atualizacao de evento
 	 * Regras de negocio validadas:
 	 * o codigo da atualizacao de evento deve ter entre 1 a 5 digitos,
 	 * o codigo do usuario deve ter entre 1 a 5 digitos,
@@ -35,7 +35,7 @@ public class AtualizacaoEventoBO {
 	 * @author Techbot Solutions
 	 * @param atualizacaoEvento recebe um objeto do tipo AtualizacaoEvento (Beans)
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
-	 * @throws Exception - Chamada da exceção checked 
+	 * @throws Exception - Chamada da excecao Exception
 	 */
 	public static String novaAtualizacaoEvento(AtualizacaoEvento atualizacaoEvento) throws Exception {
 		
@@ -123,7 +123,7 @@ public class AtualizacaoEventoBO {
 	 * @throws Exception - Chamada da exceção checked
 	 */
 
-	public static List<AtualizacaoEvento> consultaPorTipoAtualizacao(int codigoEvento) throws Exception {
+	public static List<AtualizacaoEvento> consultaPorCodigoEvento(int codigoEvento) throws Exception {
 		
 		List<AtualizacaoEvento> listaAtualizacaoEvento = new ArrayList<AtualizacaoEvento>();
 		
@@ -151,7 +151,7 @@ public class AtualizacaoEventoBO {
 	 * @return uma String com a quantidade de registros editados ou o erro ocorrido
 	 * @throws Exception - Chamada da excecao Exception
 	 */
-	public static String edicaoAtualizacaoEvento(AtualizacaoEvento atualizacaoEvento, int codigoAtualizacaoEvento)
+	public static String edicaoAtualizacaoEvento(AtualizacaoEvento atualizacaoEvento)
 			throws Exception {
 
 		if (atualizacaoEvento.getCodigoAtualizacaoEvento() < 1 || atualizacaoEvento.getCodigoAtualizacaoEvento() > 99999) {

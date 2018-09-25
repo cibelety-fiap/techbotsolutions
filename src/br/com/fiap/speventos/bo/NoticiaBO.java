@@ -19,15 +19,16 @@ import br.com.fiap.speventos.dao.NoticiaDAO;
 public class NoticiaBO {
 	
 	/**
-	 * Metodo responsavel por verificar regras de negócio, validacoes e padronizacoes
-	 * relacionadas a inserção de uma nova Noticia
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a insercao de uma nova Noticia
 	 * Regras de negocio validadas:
 	 * O codigo da noticia deve ter entre 1 a 5 digitos
 	 * O endereco do link da imagem deve ter de 1 a 50 caracteres
 	 * O nome da noticia deve ter de 1 a 80 caracteres
 	 * A categoria da noticia deve ter de 1 a 30 caracteres
+	 * a data da atualizacao de noticia deve ser valida,
 	 * A noticia deve ter de 1 a 2000 caracteres
-	 * O codigo da noticia não poda se cadastrado caso ja exista o banco
+	 * O codigo da noticia nao poda se cadastrado caso ja exista o banco
 	 * @author Techbot Solutions
 	 * @param noticia recebe um objeto do tipo Noticia (Beans)
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
@@ -52,6 +53,10 @@ public class NoticiaBO {
 			return "Categoria da noticia invalida";
 		}
 		
+		if (!DataBO.validacaoDataHora(noticia.getDataHoraNoticia())) {
+			return "Data/hora noticia invalida";
+		}
+		
 		if (noticia.getNoticia().isEmpty() || noticia.getNoticia().length() > 2000) {
 			return "Descrição da noticia invalida";
 		}
@@ -60,34 +65,29 @@ public class NoticiaBO {
 		noticia.setCategoriaNoticia(noticia.getCategoriaNoticia().toUpperCase());
 		noticia.setNoticia(noticia.getNoticia().toUpperCase());
 
-
 		NoticiaDAO dao = new NoticiaDAO();
-		
-
 		Noticia noticiaExiste = dao.consultarPorCodigo(noticia.getCodigoNoticia());
 		
 		if (noticiaExiste.getCodigoNoticia() > 0) {
-			return "Noticia já existe";
+			dao.fechar();
+			return "Noticia ja existe";
 		}
 		
-		int retorno = dao.cadastrar(noticia);
+		String retorno = dao.cadastrar(noticia) + " registro cadastrado";
 		dao.fechar();
 
-		return retorno + "registro cadastrado";
-
+		return retorno;
 	}
 	
 	/**
 	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
-	 * relacionadas a consulta de uma Noticia por codigo
+	 * relacionadas a consulta de uma noticia por codigo
 	 * Regras de negocio validadas:
-	 * O codigo da noticia deve ter entre 1 a 5 digitos
+	 * O codigo de noticia deve ter entre 1 a 5 digitos
 	 * @param codigoNoticia recebe um objeto do tipo int
 	 * @return um construtor vazio
 	 * @throws Exception - Chamada da excecao checked
 	 */
-	
-
 	public Noticia consultaNoticiaPorCodigo(int codigoNoticia) throws Exception {
 
 		if (codigoNoticia < 1 || codigoNoticia > 99999) {
@@ -111,7 +111,6 @@ public class NoticiaBO {
 	 * @return uma lista com objetos do tipo Noticia 
 	 * @throws Exception - Chamada da exceção checked
 	 */
-
 	public List<Noticia> consultaNoticiaPorNome(String nomeNoticia) throws Exception {
 		
 		List<Noticia> listaNoticia = new ArrayList<Noticia>();
@@ -138,6 +137,7 @@ public class NoticiaBO {
 	 * O codigo da noticia deve ter entre 1 a 5 digitos
 	 * O nome da noticia deve ter de 1 a 80 caracteres
 	 * A categoria da noticia deve ter de 1 a 30 caracteres
+	 * a data da atualizacao de noticia deve ser valida,
 	 * A noticia deve ter de 1 a 2000 caracteres
 	 * @param noticia recebe um objeto do tipo Noticia
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
@@ -149,13 +149,18 @@ public class NoticiaBO {
 		if (noticia.getCodigoNoticia() < 1 || noticia.getCodigoNoticia() > 99999) {
 			return "Codigo da noticia invalido";
 		}
+		if (noticia.getLinkImagem().isEmpty() || noticia.getLinkImagem().length() > 50) {
+			return "Link da noticia invalido";
+		}
 		if (noticia.getNomeNoticia().isEmpty() || noticia.getNomeNoticia().length() > 80) {
 			return "Nome da noticia invalido";
 		}
 		if (noticia.getCategoriaNoticia().isEmpty() || noticia.getCategoriaNoticia().length() > 30) {
 			return "Categoria da noticia invalida";
 		}
-		
+		if (!DataBO.validacaoDataHora(noticia.getDataHoraNoticia())) {
+			return "Data/hora noticia invalida";
+		}
 		if (noticia.getNoticia().isEmpty() || noticia.getNoticia().length() > 2000) {
 			return "Descricao da noticia invalida";
 		}
@@ -166,10 +171,10 @@ public class NoticiaBO {
 
 		NoticiaDAO dao = new NoticiaDAO();
 
-		int retorno = dao.editar(noticia);
+		String retorno = dao.editar(noticia) + " registro editado";
 		dao.fechar();
 
-		return retorno + "registro editado";
+		return retorno;
 	}
 
 	/**
@@ -190,10 +195,9 @@ public class NoticiaBO {
 
 		NoticiaDAO dao = new NoticiaDAO();
 
-		int retorno = dao.remover(codigoNoticia);
+		String retorno = dao.remover(codigoNoticia) + "registro removido";
 		dao.fechar();
 
-		return retorno + "registro removido";
+		return retorno;
 	}
-
 }

@@ -2,7 +2,6 @@ package br.com.fiap.speventos.beans;
 
 public class PessoaFisica extends Pessoa {
 
-	private int codUsuario;
 	private long cpf;
 	private int cpfDigito;
 	private char genero;
@@ -14,25 +13,15 @@ public class PessoaFisica extends Pessoa {
 		super();
 	}
 
-	public PessoaFisica(int codigoUsuario, String email, String senha, String nome, int codUsuario, long telefone,
-			String endereco, int codUsuario2, long cpf, int cpfDigito, char genero, int rg, char rgDigito,
-			String dataNascimento) {
-		super(codigoUsuario, email, senha, nome, codUsuario, telefone, endereco);
-		codUsuario = codUsuario2;
+	public PessoaFisica(int codigoUsuario, String email, String senha, String nome, long telefone, String endereco,
+			long cpf, int cpfDigito, char genero, int rg, char rgDigito, String dataNascimento) {
+		super(codigoUsuario, email, senha, nome, telefone, endereco);
 		this.cpf = cpf;
 		this.cpfDigito = cpfDigito;
 		this.genero = genero;
 		this.rg = rg;
 		this.rgDigito = rgDigito;
 		this.dataNascimento = dataNascimento;
-	}
-
-	public int getCodUsuario() {
-		return codUsuario;
-	}
-
-	public void setCodUsuario(int codUsuario) {
-		this.codUsuario = codUsuario;
 	}
 
 	public long getCpf() {
@@ -82,4 +71,5 @@ public class PessoaFisica extends Pessoa {
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
 }

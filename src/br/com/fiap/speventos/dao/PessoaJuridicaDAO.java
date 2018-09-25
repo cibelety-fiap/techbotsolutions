@@ -88,10 +88,8 @@ public class PessoaJuridicaDAO {
 					rs.getString("DS_EMAIL"),
 					rs.getString("DS_SENHA"),
 					rs.getString("NM_USUARIO"),
-					rs.getInt("CD_USUARIO"),
 					rs.getLong("NR_TELEFONE"),
 					rs.getString("DS_ENDERECO"),
-					rs.getInt("CD_USUARIO"),
 					rs.getString("NM_RAZAO_SOCIAL"),
 					rs.getLong("NR_CNPJ"),
 					rs.getInt("NR_CNPJ_DIGITO"));
@@ -127,10 +125,8 @@ public class PessoaJuridicaDAO {
 					rs.getString("DS_EMAIL"),
 					rs.getString("DS_SENHA"),
 					rs.getString("NM_USUARIO"),
-					rs.getInt("CD_USUARIO"),
 					rs.getLong("NR_TELEFONE"),
 					rs.getString("DS_ENDERECO"),
-					rs.getInt("CD_USUARIO"),
 					rs.getString("NM_RAZAO_SOCIAL"),
 					rs.getLong("NR_CNPJ"),
 					rs.getInt("NR_CNPJ_DIGITO")

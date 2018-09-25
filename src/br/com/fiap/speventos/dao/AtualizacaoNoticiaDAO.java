@@ -106,7 +106,7 @@ public class AtualizacaoNoticiaDAO {
 	  * @return uma lista com objetos do tipo atualizacao de noticia
 	  * @throws Exception - Chamada da excecao Exception
 	  */
-	public List<AtualizacaoNoticia> consultarPorCodigoNoticia(String codigoNoticia) throws Exception {
+	public List<AtualizacaoNoticia> consultarPorCodigoNoticia(int codigoNoticia) throws Exception {
 		List<AtualizacaoNoticia> listaAtualizacaoNoticia = new ArrayList<AtualizacaoNoticia>();
 
 		stmt = con.prepareStatement("SELECT * FROM T_SGE_ATUALIZACAO_NOTICIA "
@@ -115,7 +115,7 @@ public class AtualizacaoNoticiaDAO {
 				+ "INNER JOIN T_SGE_COLABORADOR ON "
 				+ "(T_SGE_ATUALIZACAO_NOTICIA.CD_USUARIO=T_SGE_COLABORADOR.CD_USUARIO) "
 				+ "WHERE T_SGE_ATUALIZACAO_NOTICIA.CD_NOTICIA=?");
-		stmt.setString(1, codigoNoticia);
+		stmt.setInt(1, codigoNoticia);
 
 		while (rs.next()) {
 			listaAtualizacaoNoticia.add(new AtualizacaoNoticia(

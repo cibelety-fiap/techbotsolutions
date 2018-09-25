@@ -3,90 +3,104 @@ package br.com.fiap.speventos.bo;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.speventos.beans.AtualizacaoEvento;
 import br.com.fiap.speventos.beans.AtualizacaoNoticia;
 import br.com.fiap.speventos.beans.Colaborador;
-import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.beans.Noticia;
-import br.com.fiap.speventos.beans.Usuario;
-import br.com.fiap.speventos.dao.AtualizacaoEventoDAO;
 import br.com.fiap.speventos.dao.AtualizacaoNoticiaDAO;
 
 /**
- * Classe para validar e padronizar dados para a tabela T_SGE_ATUALIZACAO_EVENTO
+ * Classe para validar e padronizar dados para a tabela T_SGE_ATUALIZACAO_NOTICIA
  * @version 1.0
  * @since 1.0
  * @author Techbot Solutions
- * @see AtualizacaoEvento
- * @see AtualizacaoEventoDAO 
- * @see Usuario
- * @see Evento
+ * @see AtualizacaoNoticia
+ * @see AtualizacaoNoticiaDAO 
+ * @see Colaborador
+ * @see Noticia
  *
  */
 
 public class AtualizacaoNoticiaBO {
 	
-	
 	/**
-	 * Metodo responsavel por verificar regras de negócio, validacoes e padronizacoes
-	 * relacionadas a inserção de uma nova atualizacao de noticia
+	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
+	 * relacionadas a insercao de uma nova atualizacao de noticia
 	 * Regras de negocio validadas:
-	 * O codigo da atualizacao de noticia deve ter entre 1 a 5 digitos
-	 * A data da atualizacao de noticia deve ter entre 1 a 10 caracteres
-	 * O tipo de atualizacao de noticia deve ter de 1 a 30 caracteres
-	 * O codigo da atualizacao de noticia não poda se cadastrado caso ja exista no banco
+	 * o codigo de atualizacao de noticia deve ter entre 1 a 5 digitos,
+	 * o codigo de usuario deve ter entre 1 a 5 digitos,
+	 * o codigo de noticia deve ter entre 1 a 5 digitos,
+	 * a data da atualizacao de noticia deve ser valida,
+	 * o tipo de atualizacao de noticia deve ter de 1 a 30 caracteres,
+	 * a atualizacao de noticia nao pode ser cadastrada caso o codigo da atualizacao 
+	 * ja exista no banco
 	 * @author Techbot Solutions
 	 * @param atualizacaoNoticia recebe um objeto do tipo AtualizacaoNoticia (Beans)
 	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
-	 * @throws Exception - Chamada da exceção checked 
-	 *
+	 * @throws Exception - Chamada da excecao Exception
 	 */
-
-	public static String novaAtualizacaoNoticia(AtualizacaoNoticia atualizacaoNoticia, Colaborador codigoColaborador,
-			Noticia codigoNoticia) throws Exception {
-		if (atualizacaoNoticia.getTipoAtualizacao().isEmpty()
-				|| atualizacaoNoticia.getTipoAtualizacao().length() < 30) {
-			return "Tipo de atualizacao de noticia errada";
+	public static String novaAtualizacaoNoticia(AtualizacaoNoticia atualizacaoNoticia) throws Exception {
+		
+		if (atualizacaoNoticia.getCodigoAtualizacaoNoticia() < 1 || atualizacaoNoticia.getCodigoAtualizacaoNoticia() > 99999) {
+			return "Codigo de atualizacao de noticia invalido";
 		}
-		if (atualizacaoNoticia.getDataHoraAtualizacao().isEmpty()
-				|| atualizacaoNoticia.getDataHoraAtualizacao().length() < 10) {
-			return "Data da atualização errada";
+		
+		if (atualizacaoNoticia.getColaborador().getCodigoUsuario() < 1 || atualizacaoNoticia.getColaborador().getCodigoUsuario() > 99999) {
+			return "Codigo de usuario invalido";
 		}
-		if (atualizacaoNoticia.getCodigoAtualizacaoNoticia() < 1
-				|| atualizacaoNoticia.getCodigoAtualizacaoNoticia() > 99999) {
+		
+		if (atualizacaoNoticia.getNoticia().getCodigoNoticia() < 1 || atualizacaoNoticia.getNoticia().getCodigoNoticia() > 99999) {
 			return "Codigo de noticia invalido";
+		}
+		
+		if (!DataBO.validacaoDataHora(atualizacaoNoticia.getDataHoraAtualizacao())) {
+			return "Data/hora atualizacao invalida";
+		}
+		
+		if (atualizacaoNoticia.getTipoAtualizacao().isEmpty() || atualizacaoNoticia.getTipoAtualizacao().length() > 30) {
+			return "Tipo de atualizacao invalida";
 		}
 
 		atualizacaoNoticia.setTipoAtualizacao(atualizacaoNoticia.getTipoAtualizacao().toUpperCase());
 
 		AtualizacaoNoticiaDAO dao = new AtualizacaoNoticiaDAO();
 
-		AtualizacaoNoticia atualizacaoNoticiaCodRepetido = dao
-				.consultar(atualizacaoNoticia.getCodigoAtualizacaoNoticia());
+		AtualizacaoNoticia atualizacaoNoticiaCodRepetido = dao.consultar(atualizacaoNoticia.getCodigoAtualizacaoNoticia());
 
 		if (atualizacaoNoticiaCodRepetido.getCodigoAtualizacaoNoticia() > 0) {
-			return "Atualizacao de noticia já existe";
-
+			return "Atualizacao de noticia ja existe";
 		}
 
-		dao.cadastrar(atualizacaoNoticia);
+		String cadastroNoticia = NoticiaBO.novaNoticia(new Noticia(
+				atualizacaoNoticia.getNoticia().getCodigoNoticia(), 
+				atualizacaoNoticia.getNoticia().getLinkImagem(),
+				atualizacaoNoticia.getNoticia().getNomeNoticia(),
+				atualizacaoNoticia.getNoticia().getCategoriaNoticia(),
+				atualizacaoNoticia.getNoticia().getDataHoraNoticia(),
+				atualizacaoNoticia.getNoticia().getNoticia()
+			)
+		);
+		
+		if(!cadastroNoticia.equals("1 registro cadastrado")) {
+			dao.fechar();
+			return "Erro no cadastro de noticia";
+		}
+		
+		String retorno = dao.cadastrar(atualizacaoNoticia) + " registro cadastrado";
 		dao.fechar();
-
-		return "OK";
-
+		return retorno; 
 	}
 	
 	/**
 	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
-	 * relacionadas a consulta de uma atualizacao de noticia por codigo
+	 * relacionadas a consulta de uma atualizacao de noticia por codigo de atualizacao de noticia
 	 * Regras de negocio validadas:
 	 * O codigo da atualizacao de noticia deve ter entre 1 a 5 digitos
-	 * @param codigoAtualizacaoNoticia recebe um objeto do tipo int
-	 * @return um construtor vazio
+	 * @param codigoAtualizacaoNoticia recebe um int
+	 * @return um objeto do tipo AtualizacaoNoticia (Beans)
 	 * @throws Exception - Chamada da excecao checked
 	 */
-
 	public static AtualizacaoNoticia consultaAtualizacaoNoticia(int codigoAtualizacaoNoticia) throws Exception {
+
 		if (codigoAtualizacaoNoticia < 1 || codigoAtualizacaoNoticia > 99999) {
 			return new AtualizacaoNoticia();
 		}
@@ -94,77 +108,95 @@ public class AtualizacaoNoticiaBO {
 		AtualizacaoNoticiaDAO dao = new AtualizacaoNoticiaDAO();
 
 		AtualizacaoNoticia retorno = dao.consultar(codigoAtualizacaoNoticia);
-
 		dao.fechar();
+		
 		return retorno;
-
 	}
-	
 	
 	/**
 	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
-	 * relacionadas a consulta de uma atualizacao de noticia por tipo de atualizacao
+	 * relacionadas a consulta de atualizacoes de noticia por codigo de noticia
 	 * Regras de negocio validadas:
-	 * O nome da Atualizacao de Noticia deve ter de 1 a 30 caracteres
-	 * @param tipoAtualizacao recebe um objeto do tipo String
-	 * @return uma lista com objetos do tipo Atualizacao de noticia 
+	 * O codigo de noticia deve ter entre 1 a 5 digitos
+	 * @param codigoNoticia recebe um int
+	 * @return uma lista com objetos do tipo Atualizacao de Noticia 
 	 * @throws Exception - Chamada da exceção checked
 	 */
 
-	public static List<AtualizacaoNoticia> consultaPorTipoAtualizacao(String tipoAtualizacao) throws Exception {
-
+	public static List<AtualizacaoNoticia> consultaPorCodigoNoticia(int codigoNoticia) throws Exception {
+		
 		List<AtualizacaoNoticia> listaAtualizacaoNoticia = new ArrayList<AtualizacaoNoticia>();
-
-		if (tipoAtualizacao.isEmpty() || tipoAtualizacao.length() > 30) {
+		
+		if (codigoNoticia < 1 || codigoNoticia > 99999) {
 			return listaAtualizacaoNoticia;
 		}
 
-		tipoAtualizacao = tipoAtualizacao.toUpperCase();
-
 		AtualizacaoNoticiaDAO dao = new AtualizacaoNoticiaDAO();
-		listaAtualizacaoNoticia = dao.consultarPorTipoAtualizacao(tipoAtualizacao);
-
+		
+		listaAtualizacaoNoticia = dao.consultarPorCodigoNoticia(codigoNoticia);
 		dao.fechar();
+		
 		return listaAtualizacaoNoticia;
 	}
-	
 	
 	/**
 	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
 	 * relacionadas a edicao da atualizacao de noticia
 	 * Regras de negocio validadas:
-	 * O codigo da atualizacao de noticia deve ter entre 1 a 5 digitos
-	 * O tipo da atualizacao deve ter de 1 a 30 caracteres
-	 * A data da atualizacao da noticia 1 a 10 caracteres
+	 * o codigo de atualizacao de noticia deve ter entre 1 a 5 digitos,
+	 * o codigo de usuario deve ter entre 1 a 5 digitos,
+	 * o codigo de noticia deve ter entre 1 a 5 digitos,
+	 * a data da atualizacao de noticia deve ser valida,
+	 * o tipo de atualizacao de noticia deve ter de 1 a 30 caracteres
 	 * @param atualizacaoNoticia recebe um objeto do tipo AtualizacaoNoticia
-	 * @return uma String com a quantidade de registros inseridos ou o erro ocorrido
+	 * @return uma String com a quantidade de registros editados ou o erro ocorrido
 	 * @throws Exception - Chamada da excecao Exception
 	 */
-	
-	public static String edicaoAtualizacaoNoticia(AtualizacaoNoticia AtualizacaoNoticia, int codigoAtualizacaoNoticia)
+	public static String edicaoAtualizacaoNoticia(AtualizacaoNoticia atualizacaoNoticia)
 			throws Exception {
-		if (AtualizacaoNoticia.getTipoAtualizacao().isEmpty() || AtualizacaoNoticia.getTipoAtualizacao().length() < 30) {
-			return "Tipo de atualizacao de noticia errada";
+
+		if (atualizacaoNoticia.getCodigoAtualizacaoNoticia() < 1 || atualizacaoNoticia.getCodigoAtualizacaoNoticia() > 99999) {
+			return "Codigo de atualizacao noticia invalido";
 		}
-		if (AtualizacaoNoticia.getDataHoraAtualizacao().isEmpty()
-				|| AtualizacaoNoticia.getDataHoraAtualizacao().length() < 10) {
-			return "Data da atualização errada";
+		
+		if (atualizacaoNoticia.getColaborador().getCodigoUsuario() < 1 || atualizacaoNoticia.getColaborador().getCodigoUsuario() > 99999) {
+			return "Codigo de usuario invalido";
 		}
-		if (AtualizacaoNoticia.getCodigoAtualizacaoNoticia() < 1 || AtualizacaoNoticia.getCodigoAtualizacaoNoticia() > 99999) {
+		
+		if (atualizacaoNoticia.getNoticia().getCodigoNoticia() < 1 || atualizacaoNoticia.getNoticia().getCodigoNoticia() > 99999) {
 			return "Codigo de noticia invalido";
 		}
+		
+		if (!DataBO.validacaoDataHora(atualizacaoNoticia.getDataHoraAtualizacao())) {
+			return "Data/hora atualizacao invalida";
+		}
+		
+		if (atualizacaoNoticia.getTipoAtualizacao().isEmpty() || atualizacaoNoticia.getTipoAtualizacao().length() > 30) {
+			return "Tipo de atualizacao invalida";
+		}
 
-		AtualizacaoNoticia.setTipoAtualizacao(AtualizacaoNoticia.getTipoAtualizacao().toUpperCase());
-
+		atualizacaoNoticia.setTipoAtualizacao(atualizacaoNoticia.getTipoAtualizacao().toUpperCase());
+		
+		String cadastroNoticia = NoticiaBO.novaNoticia(new Noticia(
+				atualizacaoNoticia.getNoticia().getCodigoNoticia(), 
+				atualizacaoNoticia.getNoticia().getLinkImagem(),
+				atualizacaoNoticia.getNoticia().getNomeNoticia(),
+				atualizacaoNoticia.getNoticia().getCategoriaNoticia(),
+				atualizacaoNoticia.getNoticia().getDataHoraNoticia(),
+				atualizacaoNoticia.getNoticia().getNoticia()
+			)
+		);
+		
+		if(!cadastroNoticia.equals("1 registro editado")) {
+			return "Erro no cadastro de noticia";
+		}
+		
 		AtualizacaoNoticiaDAO dao = new AtualizacaoNoticiaDAO();
-		
-		String retorno = null;
-		
-		retorno = dao.editar(AtualizacaoNoticia) + "Atualizacao editada";
+
+		String retorno = dao.editar(atualizacaoNoticia) + " registro editado";
 		dao.fechar();
-		return retorno;
+		return retorno; 
 	}
-	
 	
 	/**
 	 * Metodo responsavel por verificar regras de negocio, validacoes e padronizacoes
@@ -175,7 +207,6 @@ public class AtualizacaoNoticiaBO {
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */
-	
 	public static String remocaoNoticia(int codigoAtualizacaoNoticia) throws Exception {
 
 		if (codigoAtualizacaoNoticia < 1 || codigoAtualizacaoNoticia > 99999) {
@@ -183,13 +214,10 @@ public class AtualizacaoNoticiaBO {
 		}
 		AtualizacaoNoticiaDAO dao = new AtualizacaoNoticiaDAO();
 		
-		int retorno = dao.remover(codigoAtualizacaoNoticia);
+		String retorno = dao.remover(codigoAtualizacaoNoticia) + " registro removido";
 
 		dao.fechar();
 		
-		return retorno + "Atualizacao removido";
-
+		return retorno;
 	}
-	
-
 }
