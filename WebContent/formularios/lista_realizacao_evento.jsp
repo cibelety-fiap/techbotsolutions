@@ -10,8 +10,8 @@
 <nav>
 	<div class="menu_lateral">
 		<div>
-			<a class="menu_lateral" href="tela_usuario.jsp">
-				<button class="menu_lateral">Tela Inicial</button>
+			<a class="menu_lateral" href="EventoServlet">
+				<button class="menu_lateral">Eventos</button>
 			</a>
 		</div>
 		<button onclick="goBack()" class="menu_lateral">Voltar</button>
@@ -38,14 +38,14 @@
 
 		<tr>
 			<td class="conteudo"><a
-				href="RealizacaoEventoServlet?comando=carregar&codRealizEvento=<%=realizacaoEventoTemp.getCodigoRealizacaoEvento()%>"><%=realizacaoEventoTemp.getEvento().getNomeEvento()%></a></td>
+				href="RealizacaoEventoServlet?comando=carregar&tipoCarregamento=leitura&codRealizEvento=<%=realizacaoEventoTemp.getCodigoRealizacaoEvento()%>"><%=realizacaoEventoTemp.getEvento().getNomeEvento()%></a></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getDataHoraInicio()%></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getDataHoraTermino()%></td>
 			<td class="conteudo"><%=realizacaoEventoTemp.getLocal().getNomeLocal()%>
 			</td>
 			<td class="conteudo">
-				<button onclick="location.href='edicaoEvento.jsp'">
-					<img src="img/pen.png" id="icons">
+				<button onclick="location.href='/techbotSolutions/RealizacaoEventoServlet?comando=carregar&tipoCarregamento=edicao&codRealizEvento=<%= realizacaoEventoTemp.getCodigoRealizacaoEvento() %>'">
+						<img src="img/pen.png" id="icons">
 				</button>
 			</td>
 			<td class="conteudo">

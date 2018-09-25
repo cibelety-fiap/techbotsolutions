@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.*, br.com.fiap.speventos.beans.* "%>
+    <%@ page import="java.util.*, br.com.fiap.speventos.beans.*, br.com.fiap.speventos.bo.* "%>
 <!DOCTYPE html>
 <html>
 

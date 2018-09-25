@@ -86,6 +86,8 @@ public class RealizacaoEventoServlet extends HttpServlet {
 		int codigoLocal = Integer.parseInt(request.getParameter("codigoLocal"));
 		String dataHoraInicio = request.getParameter("dataInicio") + " " + request.getParameter("horaInicio") ;
 		String dataHoraTermino = request.getParameter("dataTermino") + " " + request.getParameter("horaTermino") ;
+		System.out.println(dataHoraInicio);
+		System.out.println(dataHoraTermino);
 		String cadastroLocal = "";
 		
 		Local local = new Local();
@@ -117,56 +119,61 @@ public class RealizacaoEventoServlet extends HttpServlet {
 			throws Exception {
 
 			int codigoRealizacaoEvento = Integer.parseInt(request.getParameter("codRealizEvento"));
+			String tipoCarregamento = request.getParameter("tipoCarregamento");
 			
 			RealizacaoEvento realizacaoEvento = RealizacaoEventoBO.consultaRealizEventoPorCodigo(codigoRealizacaoEvento);
 			
 			request.setAttribute("REALIZACAO_EVENTO", realizacaoEvento);
 			
-			RequestDispatcher dispatcher = 
-					request.getRequestDispatcher("formularios/realizacao_evento.jsp");
-			dispatcher.forward(request, response);		
+			RequestDispatcher dispatcher = null; 
+					
+			if (tipoCarregamento.equals("edicao")) {
+				dispatcher = 
+						request.getRequestDispatcher("/formularios/edicao_realizacao_evento.jsp");
+			} else {
+				dispatcher = 
+
+						request.getRequestDispatcher("/formularios/realizacao_evento.jsp");
+			}
+
+			dispatcher.forward(request, response);
 		}
 
 	private void editarRealizacaoEvento(HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
-
-		int codigoRealizacaoEvento = Integer.parseInt(request.getParameter("codigoRealizacaoEvento"));
-		//String evento = request.getParameter("evento");
-		int codigoEvento = Integer.parseInt(request.getParameter("codigoEvento"));
-		String linkImagem = request.getParameter("linkImagem");
-		String nomeEvento = request.getParameter("nomeEvento");
-		String tipoEvento = request.getParameter("tipoEvento");
-		String subtipoEvento = request.getParameter("subtipoEvento");
-		String descricaoEvento = request.getParameter("descricaoEvento");
-		String contatoMaisInfo = request.getParameter("contatoMaisInfo");
-		//String local = request.getParameter("local");
-		int codigoLocal = Integer.parseInt(request.getParameter("codigoLocal"));
-		String nomeLocal = request.getParameter("nomeLocal");
-		String enderecoLocal = request.getParameter("enderecoLocal");
-		String dataHoraInicio = request.getParameter("dataHoraInicio");
-		String dataHoraTermino = request.getParameter("dataHoraTermino");
-		
-		RealizacaoEvento realizacaoEvento = new RealizacaoEvento(
-				codigoRealizacaoEvento, 
-				new Evento(
-						codigoEvento,
-						linkImagem,
-						nomeEvento,
-						tipoEvento,
-						subtipoEvento,
-						descricaoEvento,
-						contatoMaisInfo), 
-				new Local(
-						codigoLocal,
-						nomeLocal,
-						enderecoLocal), 
-						dataHoraInicio, 
-						dataHoraTermino);
-		
-//		EventoBO.edicaoEvento(evento);
+			
+			int codigoRealizacaoEvento = RealizacaoEventoBO.consultaProxCodRealizEvento();
+			int codigoEvento = Integer.parseInt(request.getParameter("codigoEvento"));
+			int codigoLocal = Integer.parseInt(request.getParameter("codigoLocal"));
+			String dataHoraInicio = request.getParameter("dataInicio") + " " + request.getParameter("horaInicio") ;
+			String dataHoraTermino = request.getParameter("dataTermino") + " " + request.getParameter("horaTermino") ;
+			System.out.println(dataHoraInicio);
+			System.out.println(dataHoraTermino);
+			String cadastroLocal = "";
+			
+			Local local = new Local();
+			
+			Evento evento = EventoBO.consultaEvento(codigoEvento);
+			 
+			Local consultaLocal = LocalBO.consultaLocalPorCodigo(codigoLocal);	
+			if (consultaLocal.getCodigoLocal()==0) {
+				codigoLocal = LocalBO.consultaProxCodLocal();
+				local = new Local(codigoLocal, request.getParameter("nomeLocal"), request.getParameter("enderecoLocal"));
+				System.out.println(local.getCodigoLocal());
+				cadastroLocal = LocalBO.novoLocal(local);
+			} else {
+				local = consultaLocal;
+			}
 				
-		listarRealizacaoEvento(request, response);
-		
+			if (cadastroLocal.equals("1 registro cadastrado") || cadastroLocal.isEmpty()) {
+				RealizacaoEvento realizacaoEvento = new RealizacaoEvento(
+						codigoRealizacaoEvento, evento, local, dataHoraInicio, dataHoraTermino);
+				System.out.println(RealizacaoEventoBO.novaRealizacaoEvento(realizacaoEvento));
+			}
+				
+			RequestDispatcher dispatcher = 
+					request.getRequestDispatcher("RealizacaoEventoServlet?comando=listar");
+			dispatcher.forward(request, response);
 	}
 
 	private void removerRealizacaoEvento(HttpServletRequest request, HttpServletResponse response)

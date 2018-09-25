@@ -22,8 +22,7 @@ public class Logout extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		
 		HttpSession session = request.getSession();
-		session.removeAttribute("usuario");
-		session.removeAttribute("codigoUsuario");
+		session.invalidate();
 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login/telaLogout.jsp");
