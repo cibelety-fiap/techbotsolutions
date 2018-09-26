@@ -1,6 +1,6 @@
 package br.com.fiap.speventos.beans;
 
-public class PessoaFisica extends Pessoa {
+public class PessoaFisica extends Pessoa implements Comparable<Usuario>{
 
 	private long cpf;
 	private int cpfDigito;
@@ -9,6 +9,10 @@ public class PessoaFisica extends Pessoa {
 	private char rgDigito;
 	private String dataNascimento;
 
+	public int compareTo(PessoaFisica outro) {
+		return this.dataNascimento.compareTo(outro.dataNascimento);
+	}
+	
 	public PessoaFisica() {
 		super();
 	}

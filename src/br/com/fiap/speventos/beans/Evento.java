@@ -1,6 +1,7 @@
 package br.com.fiap.speventos.beans;
 
-public class Evento {
+public class Evento implements Comparable<Evento> {
+
 	private int codigoEvento;
 	private String linkImagem;
 	private String nomeEvento;
@@ -9,6 +10,10 @@ public class Evento {
 	private String descricaoEvento;
 	private String contatoMaisInfo;
 
+	public int compareTo(Evento outro) {
+		return this.tipoEvento.compareTo(outro.tipoEvento);
+	}
+	
 	public Evento() {
 
 	}

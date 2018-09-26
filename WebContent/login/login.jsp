@@ -1,6 +1,6 @@
 <%@ include file="../imports/cabecaDentroPasta.jsp"%>
         <article style="float: left;">
-          <form id="login" action="../Login" method="POST" >
+          <form id="login" action="../Login" method="POST" autocomplete="off">
             <label>Login:</label>
             <br>
             <input type="text" placeholder="E-mail" name="email">
@@ -17,7 +17,7 @@
             Caso não tenha cadastro <a href="cadastro.jsp">Clique aqui</a>
           </p>
         </article>
-        <article style="float:right;padding-right: 30%;">
+        <article class="menu_central">
           <p>
             Para fazer login como usuário:
             <br> E-mail: <strong>user@user.com</strong><!-- alterar -->

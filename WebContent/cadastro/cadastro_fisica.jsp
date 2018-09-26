@@ -62,7 +62,6 @@
       </article>
 
       <footer>Copyright &copy; 2018 SP Eventos </footer>
-    </div>
     <script>
 var botao = document.querySelector("#enviar");
 botao.addEventListener("click", function(event) {

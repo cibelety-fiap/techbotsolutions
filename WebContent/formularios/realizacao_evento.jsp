@@ -4,11 +4,7 @@
 	RealizacaoEvento realizacaoEvento = (RealizacaoEvento) request.getAttribute("REALIZACAO_EVENTO");
 %>
       <nav>
-		<div class="menu_lateral">
-		<div>
-		<a class="menu_lateral" href="tela_usuario.jsp">
-          <button class="menu_lateral">Tela Inicial</button>
-          </a></div>			
+		<div class="menu_lateral">			
           <button onclick="goBack()" class="menu_lateral">Voltar</button>
 		</div>
 	</nav>

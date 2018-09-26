@@ -20,7 +20,7 @@
 
 <div class="menu_central">
 	<br> 
-		<button onclick="window.location.href='formularios/nova_realizacao_evento.jsp?codigoEvento=<%= codigoEvento %>'" class="menu_central">Cadastrar Novo</button>
+		<button onclick="window.location.href='formularios/nova_realizacao_evento.jsp?codigoEvento=<%= codigoEvento %>'" class="menu_central">Cadastrar Nova</button>
 	<br>
 	<table class="tabela">
 		<tr>

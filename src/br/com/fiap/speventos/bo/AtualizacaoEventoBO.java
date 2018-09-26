@@ -203,7 +203,7 @@ public class AtualizacaoEventoBO {
 	 * relacionadas a remocao da atualizacao de evento
 	 * Regras de negocio validadas:
 	 * O codigo da atualizacao de evento deve ter entre 1 a 5 digitos
-	 * @param codigoAtualizacaoEvento recebe um objeto do tipo int
+	 * @param codigoAtualizacaoEvento recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

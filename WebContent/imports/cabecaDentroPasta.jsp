@@ -47,8 +47,8 @@
             <a href="../teatro_em_cartaz.jsp">Em cartaz</a>
           </div>
         </div>
-        <a href="contato.jsp">Contato</a>
-        <a href="chatbot.jsp" target="_blank" class="active">Chatbot</a>
+        <a href="../contato.jsp">Contato</a>
+        <a href="../chatbot.jsp" target="_blank" class="active">Chatbot</a>
         <div class="search-container">
           <form>
             <img src="../img/search.png" alt="" id="lupa">

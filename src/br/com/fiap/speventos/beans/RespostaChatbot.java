@@ -2,12 +2,16 @@ package br.com.fiap.speventos.beans;
 
 import java.util.ArrayList;
 
-public class RespostaChatbot {
+public class RespostaChatbot implements Comparable <RespostaChatbot> {
 
 	private String nomeEvento;
 	private String linkImagem;
 	private ArrayList<String> horariosLocalPorFilme;
 
+	public int compareTo(RespostaChatbot outro) {
+		return this.nomeEvento.compareTo(outro.nomeEvento);
+	}
+	
 	public RespostaChatbot() {
 	}
 

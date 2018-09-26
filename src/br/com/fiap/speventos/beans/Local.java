@@ -1,10 +1,15 @@
 package br.com.fiap.speventos.beans;
 
-public class Local {
+public class Local implements Comparable<Local> {
+	
 	private int codigoLocal;
 	private String nomeLocal;
 	private String enderecoLocal;
 
+	public int compareTo(Local outro) {
+		return this.nomeLocal.compareTo(outro.nomeLocal);
+	}
+	
 	public Local() {
 	}
 

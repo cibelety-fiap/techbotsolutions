@@ -203,7 +203,7 @@ public class AtualizacaoNoticiaBO {
 	 * relacionadas a remocao da atualizacao de noticia
 	 * Regras de negocio validadas:
 	 * O codigo da atualizacao de noticia deve ter entre 1 a 5 digitos
-	 * @param codigoAtualizacaoNoticia recebe um objeto do tipo int
+	 * @param codigoAtualizacaoNoticia recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

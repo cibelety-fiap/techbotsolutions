@@ -1,12 +1,17 @@
 package br.com.fiap.speventos.beans;
 
-public class Noticia {
+public class Noticia implements Comparable<Noticia> {
+	
 	private int codigoNoticia;
 	private String linkImagem;
 	private String nomeNoticia;
 	private String categoriaNoticia;
 	private String dataHoraNoticia;
 	private String noticia;
+	
+	public int compareTo(Noticia outra) {
+		return this.nomeNoticia.compareTo(outra.nomeNoticia);
+	}
 	
 	public Noticia() {
 		super();

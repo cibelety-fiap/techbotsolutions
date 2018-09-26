@@ -105,7 +105,7 @@ public class RealizacaoEventoBO {
 	 * relacionadas a consulta de uma realizacaoEvento por codigo
 	 * Regras de negocio validadas:
 	 * O codigo de realizacaoEvento deve ter entre 1 a 5 digitos
-	 * @param realizacaoEvento recebe um objeto do tipo int
+	 * @param realizacaoEvento recebe um int
 	 * @return um construtor vazio
 	 * @throws Exception - Chamada da excecao Exception
 	 */
@@ -247,7 +247,7 @@ public class RealizacaoEventoBO {
 	 * relacionadas a remocao da RealizacaoEvento
 	 * Regras de negocio validadas:
 	 * O codigo da noticia deve ter entre 1 a 5 digitos
-	 * @param codRealizEvento recebe um objeto do tipo int
+	 * @param codRealizEvento recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

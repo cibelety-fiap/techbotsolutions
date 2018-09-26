@@ -8,7 +8,7 @@
         </div>
       </nav>
       
-      <article>
+      <article class="menu_central">
           Seja bem-vindo! Nessa se&ccedil;&atilde;o voc&ecirc; poder&aacute; cadastrar eventos e alterar os seus dados cadastrais.
       </article>
       

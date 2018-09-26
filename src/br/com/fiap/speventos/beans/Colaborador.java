@@ -1,10 +1,14 @@
 package br.com.fiap.speventos.beans;
 
-public class Colaborador extends Usuario {
+public class Colaborador extends Usuario implements Comparable<Usuario> {
 
 	private String nivelAcesso;
 	private String departamento;
 
+	public int compareTo(Colaborador outro) {
+		return this.departamento.compareTo(outro.departamento);
+	}
+	
 	public Colaborador() {
 		super();
 	}

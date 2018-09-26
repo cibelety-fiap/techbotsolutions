@@ -67,7 +67,7 @@ public class LocalBO {
 	 * relacionadas a consulta de um local por codigo
 	 * Regras de negocio validadas:
 	 * O codigo do local deve ter entre 1 a 5 digitos
-	 * @param codigoLocal recebe um objeto do tipo int
+	 * @param codigoLocal recebe um int
 	 * @return um construtor vazio
 	 * @throws Exception - Chamada da excecao Exception
 	 */
@@ -152,7 +152,7 @@ public class LocalBO {
 	 * relacionadas a remocao do Local
 	 * Regras de negocio validadas:
 	 * O codigo do local deve ter entre 1 a 5 digitos
-	 * @param codigoLocal recebe um objeto do tipo int
+	 * @param codigoLocal recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

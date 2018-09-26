@@ -2,17 +2,18 @@ package br.com.fiap.speventos.beans;
 
 public class Usuario implements Comparable<Usuario> {
 	
-	public int compareTo(Usuario outro) {
-		return -this.email.compareTo(outro.email);
-	}
-	
 	private int codigoUsuario;
 	private String email;
 	private String senha;
 	private String nome;
 	
+	public int compareTo(Usuario outro) {
+		return this.email.compareTo(outro.email);
+	}
+	
 	public Usuario() {
 	}
+	
 	public Usuario(int codigoUsuario, String email, String senha, String nome) {
 		this.codigoUsuario = codigoUsuario;
 		this.email = email;

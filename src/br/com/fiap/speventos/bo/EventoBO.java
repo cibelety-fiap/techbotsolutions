@@ -84,7 +84,7 @@ public class EventoBO {
 	 * relacionadas a consulta de um Evento por codigo
 	 * Regras de negocio validadas:
 	 * O codigo do evento deve ter entre 1 a 5 digitos
-	 * @param codigoEvento recebe um objeto do tipo int
+	 * @param codigoEvento recebe um int
 	 * @return um construtor vazio
 	 * @throws Exception - Chamada da excecao checked
 	 */
@@ -209,7 +209,7 @@ public class EventoBO {
 	 * relacionadas a remocao do Evento
 	 * Regras de negocio validadas:
 	 * O codigo do Evento deve ter entre 1 a 5 digitos
-	 * @param codigoEvento recebe um objeto do tipo int
+	 * @param codigoEvento recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

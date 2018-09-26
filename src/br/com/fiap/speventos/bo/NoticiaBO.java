@@ -84,7 +84,7 @@ public class NoticiaBO {
 	 * relacionadas a consulta de uma noticia por codigo
 	 * Regras de negocio validadas:
 	 * O codigo de noticia deve ter entre 1 a 5 digitos
-	 * @param codigoNoticia recebe um objeto do tipo int
+	 * @param codigoNoticia recebe um int
 	 * @return um construtor vazio
 	 * @throws Exception - Chamada da excecao Exception
 	 */
@@ -182,7 +182,7 @@ public class NoticiaBO {
 	 * relacionadas a remocao da Noticia
 	 * Regras de negocio validadas:
 	 * O codigo da noticia deve ter entre 1 a 5 digitos
-	 * @param codigoNoticia recebe um objeto do tipo int
+	 * @param codigoNoticia recebe um int
 	 * @return uma String com o numero de registros removidos
 	 * @throws Exception - Chamada da excecao Exception
 	 */

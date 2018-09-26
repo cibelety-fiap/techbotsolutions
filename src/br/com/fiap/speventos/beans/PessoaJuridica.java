@@ -1,11 +1,15 @@
 package br.com.fiap.speventos.beans;
 
-public class PessoaJuridica extends Pessoa {
+public class PessoaJuridica extends Pessoa implements Comparable<Usuario> {
 
 	private String razaoSocial;
 	private long cnpj;
 	private int cnpjDigito;
 
+	public int compareTo(PessoaJuridica outro) {
+		return this.razaoSocial.compareTo(outro.razaoSocial);
+	}
+	
 	public PessoaJuridica() {
 		super();
 	}
