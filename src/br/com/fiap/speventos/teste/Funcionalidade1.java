@@ -40,9 +40,9 @@ public class Funcionalidade1 {
             	resultadoBusca = LocalBO.consultaLocalPorNome(nomeLocal);
                 if (!resultadoBusca.isEmpty()) {
                     for (Local localTemp : resultadoBusca) {
-                        System.out.println(localTemp.getCodigoLocal());
-                        System.out.println(localTemp.getNomeLocal());
-                        System.out.println(localTemp.getEnderecoLocal());
+                        System.out.println("Cod do local: " + localTemp.getCodigoLocal());
+                        System.out.println("Nome do local: " + localTemp.getNomeLocal());
+                        System.out.println("Endereco: " + localTemp.getEnderecoLocal());
                         System.out.println("-------------------------------");
                     }
                     strCodLocal = Magica.texto("Digite um dos codigos listados ou cancele.");
@@ -68,52 +68,9 @@ public class Funcionalidade1 {
             }
         } catch (Exception e) {
 
-            e.printStackTrace();
+//            e.printStackTrace();
             System.out.println(Excecao.tratarExcecao(e));
 
         }
     }
-
-    // try {
-    //
-    // int codigoRealizEvento = RealizacaoEventoBO.consultaProxCodRealizEvento();
-    // int codEvento = 30; //Evento ja existente na base, na servlet ele eh
-    // preenchido automaticamente por doGET
-    // //Pode ser encontrado na base por "os incriveis"
-    // int codLocal = Magica.inteiro("Codigo Local");
-    // Local local = new Local();
-    // String cadastroLocal = "";
-    //
-    // System.out.println(codigoRealizEvento);
-    //
-    // Local consultaLocal = LocalBO.consultaLocalPorCodigo(codLocal);
-    // if (consultaLocal.getCodigoLocal() == 0) {
-    // JOptionPane.showMessageDialog(null, "Local não encontrado, preencha os
-    // próximos dados.");
-    // codLocal = LocalBO.consultaProxCodLocal();
-    // local = new Local(codLocal, Magica.texto("Nome Local"),
-    // Magica.texto("Endereco do local"));
-    // cadastroLocal = LocalBO.novoLocal(local);
-    // } else {
-    // JOptionPane.showMessageDialog(null, "Local encontrado, os dados serão
-    // preenchidos automaticamente.");
-    // local = consultaLocal;
-    // }
-    // String dataHoraInicio = Magica.texto("Data de inicio = dd/mm/yyyy") + " "
-    // + Magica.texto("Hora de inicio - hh:mi");
-    // String dataHoraTermino = Magica.texto("Data de termino = dd/mm/yyyy") + " "
-    // + Magica.texto("Hora de termino - hh:mi");
-    //
-    // if (cadastroLocal.equals("1 registro cadastrado") || cadastroLocal.isEmpty())
-    // {
-    // RealizacaoEvento realizacaoEvento = new RealizacaoEvento(
-    // codigoRealizEvento, EventoBO.consultaEvento(codEvento), local,
-    // dataHoraInicio, dataHoraTermino);
-    // System.out.println(RealizacaoEventoBO.novaRealizacaoEvento(realizacaoEvento));
-    // }
-    // } catch (Exception e) {
-    //// e.printStackTrace();
-    // System.out.println(Excecao.tratarExcecao(e));
-    // }
-    // }
 }
