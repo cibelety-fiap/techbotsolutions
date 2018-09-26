@@ -1,0 +1,26 @@
+
+FUNCIONALIDADE 1
+(br.com.fiap.speventos.teste.Funcionalidade1.java)
+
+	* Nessa funcionalidade, podemos inserir uma nova Realizacao de Evento relacionada a um Evento já cadastrado.
+
+	* O usuario pode inserir um local ja cadastrado, se des
+
+	
+	
+	
+
+
+
+FUNCIONALIDADE 2
+(br.com.fiap.speventos.teste.Funcionalidade2.java)
+
+	* Nessa funcionalidade, podemos consultar todas as Realizacoes de Evento (ocorrências) de determinado Evento. 
+
+	* Essa consulta sera feita a partir do nome do evento ou parte do nome. 
+
+	* As Realizacoes de Evento encontradas serao listadas na console
+
+	* Caso a busca nao retorne nenhuma ocorrência, o programa tambem ira apresentar essa informacao.
+
+

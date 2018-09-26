@@ -37,7 +37,7 @@ public class Funcionalidade2 {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			System.out.println(Excecao.tratarExcecao(e));
 		}
 	}
