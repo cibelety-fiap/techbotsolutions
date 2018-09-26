@@ -144,7 +144,7 @@ public class LocalBO {
 		int retorno = dao.editar(local);
 		dao.fechar();
 		
-		return retorno + "registro editado";
+		return retorno + " registro editado";
 	}
 	
 	/**

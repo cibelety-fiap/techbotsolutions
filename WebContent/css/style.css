@@ -185,6 +185,14 @@ p {
 	text-align: justify;
 }
 
+input {
+	height:20px;
+}
+
+button {
+	padding: 5px 10px 5px 10px;
+}
+
 .imagem_miniatura {
 	width: 300px;
 	float: left;

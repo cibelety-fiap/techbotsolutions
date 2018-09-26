@@ -45,6 +45,10 @@ public class RealizacaoEventoServlet extends HttpServlet {
 				carregarRealizacaoEvento(request, response);
 				break;
 				
+			case "buscarLocal":
+				buscarLocal(request, response);
+				break;
+				
 			case "editar":
 				editarRealizacaoEvento(request, response);
 				break;
@@ -73,6 +77,18 @@ public class RealizacaoEventoServlet extends HttpServlet {
 			request.setAttribute("codigoEvento", codigoEvento);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("formularios/lista_realizacao_evento.jsp");
+			dispatcher.forward(request, response);
+		}
+	
+	private void buscarLocal(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		
+			String nomeLocalBusca = request.getParameter("nomeLocalBusca");
+			List<RealizacaoEvento> listaRealizacaoEvento = RealizacaoEventoBO.consultaRealizEventoPorNomeEvento(nomeLocalBusca);
+		
+			request.setAttribute("LISTA_REALIZACAO_EVENTO", listaRealizacaoEvento);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("formularios/buscar_local.jsp");
 			dispatcher.forward(request, response);
 		}
 	
@@ -164,13 +180,13 @@ public class RealizacaoEventoServlet extends HttpServlet {
 				codigoLocal = LocalBO.consultaProxCodLocal();
 				local = new Local(codigoLocal, nomeLocal, enderecoLocal);
 				System.out.println(local.getCodigoLocal());
-				cadastroLocal = LocalBO.edicaoLocal(local);
+				cadastroLocal = LocalBO.novoLocal(local);
 				System.out.println(cadastroLocal);
 			} else {
 				local = consultaLocal;
 			}
 			
-			if (cadastroLocal.equals("1 registro editado") || cadastroLocal.isEmpty()) {
+			if (cadastroLocal.equals("1 registro cadastrado") || cadastroLocal.isEmpty()) {
 				RealizacaoEvento realizacaoEvento = new RealizacaoEvento(
 						codigoRealizEvento, evento, local, dataHoraInicio, dataHoraTermino);
 				System.out.println(RealizacaoEventoBO.edicaoRealizacaoEvento(realizacaoEvento));

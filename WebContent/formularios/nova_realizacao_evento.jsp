@@ -31,7 +31,10 @@
 		<input id="horaTermino" type="text" name="horaTermino" value=""><br><br>
 		<br /><hr><br />
 		<label>Nome local:</label><br />
-		<input type="text" name="nomeLocal" value="" maxlength="100"><br /><br />
+		<input type="text" name="nomeLocal" value="" maxlength="100">
+		<button onclick='window.open("busca_local.jsp",
+"","menubar=1,resizable=1,width=350,height=250")' type="button">Buscar</button><br /><br />
+		
 		<label>Endere&ccedil;o:</label><br />
 
 		<textarea rows="4" name="enderecoLocal"></textarea><br /><br /><br />

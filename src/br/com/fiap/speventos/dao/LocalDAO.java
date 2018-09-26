@@ -129,7 +129,7 @@ public class LocalDAO {
 		
 		stmt.setInt(1, local.getCodigoLocal());
 		stmt.setString(2, local.getNomeLocal());
-		stmt.setString(3,  local.getEnderecoLocal());
+		stmt.setString(3, local.getEnderecoLocal());
 		stmt.setInt(4, local.getCodigoLocal());
 		
 		return stmt.executeUpdate();
