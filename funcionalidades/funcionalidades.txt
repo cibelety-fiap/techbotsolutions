@@ -4,12 +4,14 @@ FUNCIONALIDADE 1
 
 	* Nessa funcionalidade, podemos inserir uma nova Realizacao de Evento relacionada a um Evento já cadastrado.
 
-	* O usuario pode inserir um local ja cadastrado, se des
-
+	* O usuario insere as datas e horas de inicio e termino. Em seguida informa se deseja ou nao realizar uma busca
+	de local por nome
 	
+	* Caso ele encontre um local com as informacoes que deseja, ele pode selecionar o codigo desejado e nao precisa
+	apresentar mais informacoes
 	
-	
-
+	* Caso ele nao opte pela busca ou nao tenha encontrado na lista o seu local, o usuario pode digitar as devidas
+	informacoes (nome do local e endereco) e cadastrar novo local.
 
 
 FUNCIONALIDADE 2

@@ -93,13 +93,13 @@ public class LocalDAO {
 	  * @throws Exception - Chamada da excecao Exception
 	  */
 	public List<Local> consultarPorNome(String nomeLocal) throws Exception {
-		
+		System.out.println(nomeLocal);
 		List<Local> listaLocal = new ArrayList<Local>();
 		
 		stmt = con.prepareStatement("SELECT CD_LOCAL, NM_LOCAL, DS_ENDERECO FROM T_SGE_LOCAL "
 				+ "WHERE UPPER(NM_LOCAL) LIKE ?");
 		stmt.setString(1, "%" + nomeLocal + "%");
-		
+		System.out.println(nomeLocal);
 		rs = stmt.executeQuery();
 		
 		while(rs.next()) {
