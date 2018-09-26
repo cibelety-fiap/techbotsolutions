@@ -88,7 +88,7 @@ public class RealizacaoEventoServlet extends HttpServlet {
 		
 			request.setAttribute("LISTA_REALIZACAO_EVENTO", listaRealizacaoEvento);
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("formularios/buscar_local.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("formularios/resultado_busca_local.jsp");
 			dispatcher.forward(request, response);
 		}
 	

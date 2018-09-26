@@ -2,10 +2,14 @@
 <%
 	RealizacaoEvento realizacaoEvento = (RealizacaoEvento) request.getAttribute("REALIZACAO_EVENTO");
 %>
-
+<nav>
+	<div class="menu_lateral">
+		<button onclick="goBack()" class="menu_lateral">Voltar</button>
+	</div>
+</nav>
 <div class="menu_central">
 
-	<h1>Nova Realizacao do Evento</h1>
+	<h1>Edi&ccedil;&atilde;o Realiza&ccedil;&atilde;o de Evento</h1>
 		<br><br>
 	
 	<form action="RealizacaoEventoServlet" method="GET">

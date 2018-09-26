@@ -3,7 +3,6 @@ package br.com.fiap.speventos.bo;
 import java.util.ArrayList;
 import java.util.List;
 
-import antigo.Evento_antigo;
 import br.com.fiap.speventos.beans.Evento;
 import br.com.fiap.speventos.dao.EventoDAO;
 

@@ -64,17 +64,5 @@
 	</table>
 </div>
 
-<script>
-	function okOrCancel() {
-		var txt;
-		var r = confirm("Por favor confirme para deletar");
-		if (r == true) {
-			txt = "You pressed OK!";
-		} else {
-			txt = "You pressed Cancel!";
-		}
-	}
-</script>
-
 
 <%@ include file="../imports/rodape.jsp"%>

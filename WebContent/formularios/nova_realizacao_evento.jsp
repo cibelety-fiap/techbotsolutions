@@ -4,10 +4,14 @@
 	int codigoEvento = Integer.parseInt(request.getParameter("codigoEvento"));
 
 %>
-
+<nav>
+	<div class="menu_lateral">
+		<button onclick="goBack()" class="menu_lateral">Voltar</button>
+	</div>
+</nav>
 <div class="menu_central">
 
-	<h1>Nova Realizacao do Evento</h1>
+	<h1>Nova Realiza&ccedil;&atilde;o de Evento</h1>
 		<br><br>
 	
 	<form action="../RealizacaoEventoServlet" method="GET">
@@ -31,9 +35,7 @@
 		<input id="horaTermino" type="text" name="horaTermino" value=""><br><br>
 		<br /><hr><br />
 		<label>Nome local:</label><br />
-		<input type="text" name="nomeLocal" value="" maxlength="100">
-		<button onclick='window.open("busca_local.jsp",
-"","menubar=1,resizable=1,width=350,height=250")' type="button">Buscar</button><br /><br />
+		<input type="text" name="nomeLocal" value="" maxlength="100"><br /><br />
 		
 		<label>Endere&ccedil;o:</label><br />
 

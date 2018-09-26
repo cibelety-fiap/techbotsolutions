@@ -1,4 +1,4 @@
-<%@ include file="imports/cabeca.jsp"%>
+<%@ include file="../imports/cabeca.jsp"%>
 
 	<nav>
         <br />
@@ -106,4 +106,4 @@ $(document).ready(function() {
   });
 });
     </script>
-<%@ include file="imports/rodape.jsp"%>
+<%@ include file="../imports/rodape.jsp"%>
