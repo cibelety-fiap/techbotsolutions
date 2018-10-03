@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import com.ibm.watson.developer_cloud.conversation.v1.Conversation;
@@ -47,8 +46,7 @@ public class MessageServlet extends HttpServlet {
 			tipo_filme = "";
 			dia = "";
 			horario = "";
-		}
-		if (limparDados == true) {
+		} else if (limparDados == true) {
 			contexto.remove("hora");
 			contexto.remove("tipo_filme");
 			contexto.remove("dia");
@@ -110,6 +108,7 @@ public class MessageServlet extends HttpServlet {
 
 			}
 		} else {
+			limparDados = false;
 			respostaParaChatbot = new Gson().toJson(response.getOutput().getText());
 		}
 		resp.setContentType("text/html");
